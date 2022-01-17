@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EscenarioAire.unity
     guid: 92d2581a9756f2c49bbf370d1c734fc3
+  - enabled: 1
+    path: Assets/Scenes/Pruebas.unity
+    guid: 6ba0fc6d5bd18384889910b7f0e535c8
   m_configObjects: {}
