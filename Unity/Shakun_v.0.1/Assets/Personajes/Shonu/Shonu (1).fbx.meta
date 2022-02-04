@@ -64,7 +64,7 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -86,362 +86,362 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: Cuerpo
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000048793077, y: 0.00035243496, z: 0.000006698602}
+      position: {x: -0.048793077, y: 3.5243497, z: 0.066986024}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cabesa
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000020339994, y: 0.0006569125, z: 0.000009722948}
+      position: {x: 0.020339994, y: 6.569125, z: 0.09722948}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: GuanteD
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0001782456, y: 0.00041468398, z: -0.0000018236502}
+      position: {x: 1.7824559, y: 4.1468396, z: -0.018236503}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Gorrito
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000021556511, y: 0.0006345449, z: 0.0000067152982}
+      position: {x: 0.02155651, y: 6.3454485, z: 0.06715299}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Abrigo
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000014782147, y: 0.00048687338, z: 0.0000055831}
+      position: {x: -0.14782149, y: 4.868734, z: 0.055830996}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Camisa
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000019486488, y: 0.00048313246, z: 0.0000055739492}
+      position: {x: 0.019486487, y: 4.8313246, z: 0.055739492}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: BotaIzquierda
       parentName: Shonu (1)(Clone)
-      position: {x: -0.00004160135, y: 0.0000791813, z: -0.0000067246997}
+      position: {x: -0.4160135, y: 0.791813, z: -0.067247}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Pantalon
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000015414506, y: 0.00027068195, z: -0.000006865549}
+      position: {x: 0.015414506, y: 2.7068193, z: -0.06865549}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: ZapatoDerecho
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000051978895, y: 0.000020964699, z: 0.000019251249}
+      position: {x: 0.519789, y: 0.209647, z: 0.19251248}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: ZapatoIzquierdo
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000049218204, y: 0.000020745698, z: 0.00002029225}
+      position: {x: -0.492182, y: 0.20745699, z: 0.2029225}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: CintaIzquierda
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000567579, y: 0.00037249376, z: -0.0000032207995}
+      position: {x: -0.56757903, y: 3.7249374, z: -0.032207992}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: CintaDerecha
       parentName: Shonu (1)(Clone)
-      position: {x: 0.00005900504, y: 0.0003726102, z: -0.0000031472505}
+      position: {x: 0.59005046, y: 3.7261019, z: -0.031472504}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Vendas
       parentName: Shonu (1)(Clone)
-      position: {x: 0.00017724666, y: 0.00041529353, z: -0.0000019230993}
+      position: {x: 1.7724665, y: 4.1529355, z: -0.019230992}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Boton1
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000020617754, y: 0.0005348549, z: 0.000043764194}
+      position: {x: 0.20617753, y: 5.3485484, z: 0.4376419}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Boton2
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000194473, y: 0.00049811084, z: 0.00005110845}
+      position: {x: 0.194473, y: 4.981108, z: 0.5110845}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Boton3
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000018599098, y: 0.00046128966, z: 0.000053730495}
+      position: {x: 0.18599097, y: 4.612897, z: 0.53730494}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Boton4
       parentName: Shonu (1)(Clone)
-      position: {x: 0.00001840605, y: 0.0004269778, z: 0.000050613544}
+      position: {x: 0.1840605, y: 4.2697783, z: 0.50613546}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Boton5
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000191341, y: 0.0005355038, z: 0.000044390345}
+      position: {x: -0.19134101, y: 5.3550377, z: 0.44390342}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Boton6
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000020175901, y: 0.0004982998, z: 0.0000511639}
+      position: {x: -0.20175901, y: 4.982998, z: 0.511639}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Boton7
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000021741846, y: 0.00046137, z: 0.000052200052}
+      position: {x: -0.21741846, y: 4.6137, z: 0.52200055}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Boton8
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000206105, y: 0.00042710558, z: 0.000049229802}
+      position: {x: -0.206105, y: 4.2710557, z: 0.492298}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: CejaIzquierda
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000013704049, y: 0.000656132, z: 0.0000503492}
+      position: {x: -0.1370405, y: 6.5613194, z: 0.503492}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: CejaDerecha
       parentName: Shonu (1)(Clone)
-      position: {x: 0.00001704975, y: 0.0006556044, z: 0.00005099225}
+      position: {x: 0.1704975, y: 6.556044, z: 0.50992244}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon1
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000052001345, y: 0.00001903365, z: 0.000041669802}
+      position: {x: -0.5200135, y: 0.1903365, z: 0.41669798}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon2
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000049607053, y: 0.000022693352, z: 0.0000342737}
+      position: {x: -0.4960705, y: 0.22693351, z: 0.342737}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon3
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000051156152, y: 0.000022171, z: 0.0000353868}
+      position: {x: -0.5115615, y: 0.22171, z: 0.353868}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon5
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000483464, y: 0.0000279289, z: 0.000023553699}
+      position: {x: -0.483464, y: 0.279289, z: 0.235537}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon6
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000456635, y: 0.000033749948, z: 0.00001350725}
+      position: {x: -0.45663497, y: 0.3374995, z: 0.1350725}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon7
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000464876, y: 0.00003355025, z: 0.00001468155}
+      position: {x: -0.46487597, y: 0.3355025, z: 0.14681551}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon8
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000056108154, y: 0.0000160836, z: 0.0000434916}
+      position: {x: 0.5610815, y: 0.16083598, z: 0.434916}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon9
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000056114048, y: 0.0000204386, z: 0.000038562797}
+      position: {x: 0.5611405, y: 0.20438598, z: 0.38562796}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon10
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000053361993, y: 0.00002000675, z: 0.000037945803}
+      position: {x: 0.53362, y: 0.20006749, z: 0.379458}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon11
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000053602555, y: 0.000025224299, z: 0.0000291083}
+      position: {x: 0.5360255, y: 0.25224298, z: 0.291083}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon12
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000052654203, y: 0.0000255604, z: 0.000027109152}
+      position: {x: 0.526542, y: 0.255604, z: 0.27109152}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon13
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000050303443, y: 0.00003198275, z: 0.00001779805}
+      position: {x: 0.5030345, y: 0.3198275, z: 0.1779805}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cordon14
       parentName: Shonu (1)(Clone)
-      position: {x: 0.00005139925, y: 0.0000316827, z: 0.00001615475}
+      position: {x: 0.5139925, y: 0.316827, z: 0.16154748}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: OjoIzquierdo
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000129725495, y: 0.00064819667, z: 0.00003967645}
+      position: {x: -0.1297255, y: 6.4819665, z: 0.39676452}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: OjoDerecho
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000016923652, y: 0.00064802147, z: 0.000039654}
+      position: {x: 0.16923651, y: 6.480214, z: 0.39654}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface49
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000016637001, y: 0.00065223867, z: 0.000059239195}
+      position: {x: 0.016637001, y: 6.5223866, z: 0.59239197}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface50
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000129528, y: 0.0006482021, z: 0.00006021315}
+      position: {x: -0.129528, y: 6.48202, z: 0.6021315}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface51
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000229629, y: 0.0006484104, z: 0.0000533367}
+      position: {x: -0.229629, y: 6.484103, z: 0.533367}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface52
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000026890002, y: 0.00064827903, z: 0.0000587757}
+      position: {x: -0.02689, y: 6.482791, z: 0.587757}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface53
       parentName: Shonu (1)(Clone)
-      position: {x: -0.00001298465, y: 0.00065695384, z: 0.000059697046}
+      position: {x: -0.1298465, y: 6.5695376, z: 0.59697044}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface54
       parentName: Shonu (1)(Clone)
-      position: {x: -0.00001298465, y: 0.00063951866, z: 0.000057850146}
+      position: {x: -0.1298465, y: 6.395186, z: 0.57850146}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface55
       parentName: Shonu (1)(Clone)
-      position: {x: 0.00001628015, y: 0.0006482021, z: 0.00006021315}
+      position: {x: 0.1628015, y: 6.48202, z: 0.6021315}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface56
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000026290301, y: 0.0006484104, z: 0.0000533367}
+      position: {x: 0.262903, y: 6.484103, z: 0.533367}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface57
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000060162997, y: 0.00064827903, z: 0.0000587757}
+      position: {x: 0.060162995, y: 6.482791, z: 0.587757}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface58
       parentName: Shonu (1)(Clone)
-      position: {x: 0.00001631195, y: 0.00065695384, z: 0.000059697046}
+      position: {x: 0.16311948, y: 6.5695376, z: 0.59697044}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface59
       parentName: Shonu (1)(Clone)
-      position: {x: 0.00001631195, y: 0.00063951866, z: 0.000057850146}
+      position: {x: 0.16311948, y: 6.395186, z: 0.57850146}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface60
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000012805001, y: 0.0006488641, z: 0.000053543597}
+      position: {x: -0.12805, y: 6.4886417, z: 0.535436}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface61
       parentName: Shonu (1)(Clone)
-      position: {x: 0.00001613235, y: 0.0006488641, z: 0.000053543597}
+      position: {x: 0.1613235, y: 6.4886417, z: 0.535436}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface62
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000012919199, y: 0.0006478184, z: 0.00006309335}
+      position: {x: -0.12919198, y: 6.4781833, z: 0.6309335}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface63
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000162466, y: 0.0006478184, z: 0.00006309335}
+      position: {x: 0.162466, y: 6.4781833, z: 0.6309335}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface64
       parentName: Shonu (1)(Clone)
-      position: {x: -0.000012953549, y: 0.000648408, z: 0.00005491755}
+      position: {x: -0.1295355, y: 6.48408, z: 0.5491755}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface65
       parentName: Shonu (1)(Clone)
-      position: {x: 0.000016280948, y: 0.000648408, z: 0.00005491755}
+      position: {x: 0.16280948, y: 6.48408, z: 0.5491755}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface66
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000289399, y: 0.00064877135, z: 0.00005235205}
+      position: {x: 0.289399, y: 6.4877133, z: 0.5235205}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface67
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000297979, y: 0.0006487713, z: 0.000052352047}
+      position: {x: 0.297979, y: 6.487713, z: 0.52352047}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface68
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000256125, y: 0.0006487713, z: 0.00005235205}
+      position: {x: -0.256125, y: 6.487713, z: 0.5235205}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface69
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0000264705, y: 0.0006487713, z: 0.000052352047}
+      position: {x: -0.264705, y: 6.487713, z: 0.52352047}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface70
       parentName: Shonu (1)(Clone)
-      position: {x: -0.00019732065, y: 0.00042355678, z: 0.0000063551997}
+      position: {x: -1.9732064, y: 4.2355676, z: 0.063552}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface71
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0001947463, y: 0.00042097812, z: -0.0000041496}
+      position: {x: -1.947463, y: 4.209781, z: -0.041496}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface72
       parentName: Shonu (1)(Clone)
-      position: {x: -0.00019089156, y: 0.00041553666, z: -0.00000991915}
+      position: {x: -1.9089155, y: 4.1553664, z: -0.0991915}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface73
       parentName: Shonu (1)(Clone)
-      position: {x: -0.00018440175, y: 0.00041054434, z: -0.00000873445}
+      position: {x: -1.8440174, y: 4.1054435, z: -0.08734449}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface74
       parentName: Shonu (1)(Clone)
-      position: {x: -0.00017980991, y: 0.00040851842, z: -0.00000099715}
+      position: {x: -1.798099, y: 4.085184, z: -0.009971499}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface75
       parentName: Shonu (1)(Clone)
-      position: {x: -0.0001898152, y: 0.00042337246, z: 0.000015530599}
+      position: {x: -1.898152, y: 4.2337246, z: 0.155306}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface76
       parentName: Shonu (1)(Clone)
-      position: {x: -0.00017867099, y: 0.00041944903, z: 0.00001469595}
+      position: {x: -1.78671, y: 4.1944904, z: 0.1469595}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface77
       parentName: Shonu (1)(Clone)
-      position: {x: -0.00017675564, y: 0.0004112106, z: 0.00000839155}
+      position: {x: -1.7675564, y: 4.1121063, z: 0.0839155}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Mascara:Rejilla
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000012962437, y: 0.00061234564, z: 0.00006715658}
+      position: {x: 0.012962437, y: 6.123457, z: 0.6715658}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Mascara:Mascara
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000010770962, y: 0.0006205612, z: 0.000056083998}
+      position: {x: 0.010770962, y: 6.205611, z: 0.56084}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Mascara:Aro
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000013046993, y: 0.0006139766, z: 0.000064572465}
+      position: {x: 0.013046994, y: 6.1397667, z: 0.64572465}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Mascara:Clip
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000011376627, y: 0.0006279772, z: 0.000049845767}
+      position: {x: 0.011376626, y: 6.279772, z: 0.49845767}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Mascara:Clip2
       parentName: Shonu (1)(Clone)
-      position: {x: 0.0000011646852, y: 0.0006170782, z: 0.000046059202}
+      position: {x: 0.011646852, y: 6.1707816, z: 0.46059203}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
@@ -451,7 +451,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.01
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
