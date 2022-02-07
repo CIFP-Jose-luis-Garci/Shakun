@@ -62,7 +62,7 @@ public class ShonuMove : MonoBehaviour
     void Correr()
     {
         animator.SetBool("RunShonu", true);
-        speed = 5f;
+        speed = 20f;
         dir = transform.TransformDirection(Vector3.forward);
         cc.SimpleMove(dir * speed * stickL.y);
     }
@@ -74,7 +74,7 @@ public class ShonuMove : MonoBehaviour
 
         if (stickL.y > 0)
         {
-            speed = 2.2f;
+            speed = 5f;
         }
         else
         {
