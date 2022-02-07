@@ -7,87 +7,195 @@ public class ShonuMove : MonoBehaviour
     InputControl inputcontrol;
 
     bool corriendo = false;
-   // bool camninado = false;
+    // bool camninado = false;
+    public CharacterController controller;
 
-    Vector2 stickL;
+    public Rigidbody rb;
+
+    public Transform Camera;
+
+    public float TurnSmothTime = 0.3f;
+    float TurnSmothness;
+
+    private Vector3 velocity = new Vector3(0f, Physics.gravity.y, 0f);
+
+    public static float FallingSpeed = 0.5f;
+
+    public static bool IsGrounded = true;
+
+    float AvaliableJump;
+
+    public float AlturaSalto = 100f;
+
+    public float Dash = 10f;
+
+    public GameObject NL2;
+
+    public float NL2AttackTime = 1f;
+
+    public static int Vida;
+
+    public bool Alive = true;
 
     Animator animator;
 
     CharacterController cc;
 
-    float speed;
+    float speed = 10;
 
     Vector3 dir;
 
+    Vector2 MovePos;
+
+   
     private void Awake()
     {
         inputcontrol = new InputControl();
 
+        //Mover
+        inputcontrol.Moverse.Move.performed += ctx => MovePos = ctx.ReadValue<Vector2>();
+        inputcontrol.Moverse.Move.canceled += ctx => MovePos = Vector2.zero;
 
 
         //Correr
         inputcontrol.Moverse.Run.performed += ctx => { corriendo = true; };
         inputcontrol.Moverse.Run.canceled += ctx => { corriendo = false; };
 
-        //Caminar
-        inputcontrol.Moverse.Move.performed += ctx => stickL = ctx.ReadValue<Vector2>();
-        inputcontrol.Moverse.Move.canceled += ctx => stickL = Vector2.zero;
 
 
+        
+        
     }
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+
+        Cursor.visible = true;
+
+        Vida = 50;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (corriendo && stickL.y > 0)
-        {
-            Correr();
+        Movimiento();
 
+        Gravity();
+        print(speed);
+        
+    }
+
+    
+    
+    void Movimiento()
+    {
+
+        animator.SetFloat("WalkShonu", MovePos.y);
+
+        animator.SetFloat("RunFast", speed);
+
+        //apartado de movimiento de cámara y de personaje (wasd)
+
+        //float horizontal = Input.GetAxisRaw("Horizontal");
+
+        float horizontal = MovePos.x;
+
+        float vertical = MovePos.y;
+
+        Vector3 Dirección = new Vector3(horizontal, 0f, vertical).normalized;
+
+
+
+        //crar vector para que el controller mueva dependiendo de  donde está la cámara.
+
+        float angle = Mathf.Atan2(Dirección.x, Dirección.z) * Mathf.Rad2Deg + Camera.eulerAngles.y;
+
+        float SmoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref TurnSmothness, TurnSmothTime);
+
+        if(MovePos.y > 0)
+        {
+            transform.rotation = Quaternion.Euler(0f, SmoothAngle, 0f);
+        }
+        
+
+        Vector3 Movement = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+
+        if (Dirección.magnitude >= 0.1)
+        {
+            
+
+            controller.Move(Movement.normalized * speed * Time.deltaTime);
+
+            //rb.AddForce(Movement.normalized * speed * Time.deltaTime);
+
+
+        }
+
+
+        
+        if(corriendo && MovePos.y >0)
+        {
+            if (speed <= 30)
+            {
+                StartCoroutine("RampantRun");
+            }
+            else
+            {
+                StopCoroutine("RampantRun");
+            }
+            
+            animator.SetBool("RunShonu", true);
+
+            
         }
         else
-        {
-            Caminar();
-        }
-
-        //Giro
-        transform.Rotate(new Vector3(0f, stickL.x * 0.8f, 0f));
-    }
-
-    void Correr()
-    {
-        animator.SetBool("RunShonu", true);
-        speed = 20f;
-        dir = transform.TransformDirection(Vector3.forward);
-        cc.SimpleMove(dir * speed * stickL.y);
-    }
-    void Caminar()
-    {
-        
-        animator.SetBool("RunShonu", false);
-        animator.SetFloat("WalkShonu", stickL.y);
-
-        if (stickL.y > 0)
         {
             speed = 5f;
+            animator.SetBool("RunShonu", false);
         }
-        else
+
+
+        /*
+
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            speed = 0.8f;
+
+
+            controller.Move(Movement.normalized * Dash * Time.deltaTime);
+
+            print("AAAA");
+
+
+
+        }
+        */
+    }
+    
+    void Gravity()
+    {
+
+        if (controller.isGrounded == false)
+        {
+
+            velocity.y -= FallingSpeed;
+
+
+            controller.Move(velocity * Time.deltaTime * FallingSpeed);
+
+
+        }
+        else if (controller.isGrounded && velocity.y < 0)
+        {
+            velocity.y = 0f;
+
+
         }
 
-        dir = transform.TransformDirection(Vector3.forward);
-
-        cc.SimpleMove(dir * speed * stickL.y);
     }
-
-
-
 
 
 
@@ -100,4 +208,16 @@ public class ShonuMove : MonoBehaviour
     {
         inputcontrol.Disable();
     }
+
+
+    IEnumerator RampantRun()
+    {
+        while (speed <= 30) {
+            
+            speed += 0.06f;
+
+            yield return new WaitForSeconds(1f);
+        } 
+    }
+
 }

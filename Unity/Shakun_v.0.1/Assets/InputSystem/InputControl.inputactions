@@ -26,7 +26,7 @@
                 {
                     "name": "",
                     "id": "12074c53-0142-4001-bb54-101fe44de81f",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -53,6 +53,33 @@
                     "processors": "",
                     "groups": "",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Camara",
+            "id": "521a41ac-b6bb-4e30-8370-e6fed0ee745e",
+            "actions": [
+                {
+                    "name": "MoverCamara",
+                    "type": "Value",
+                    "id": "c9ca11ae-7de7-49d0-9eb6-a2b7b3501bb5",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3bed6083-50b0-410c-9558-c631e1b5324a",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoverCamara",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

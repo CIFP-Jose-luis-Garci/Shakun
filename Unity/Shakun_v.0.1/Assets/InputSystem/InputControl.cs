@@ -39,7 +39,7 @@ public class @InputControl : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""12074c53-0142-4001-bb54-101fe44de81f"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -70,6 +70,33 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Camara"",
+            ""id"": ""521a41ac-b6bb-4e30-8370-e6fed0ee745e"",
+            ""actions"": [
+                {
+                    ""name"": ""MoverCamara"",
+                    ""type"": ""Value"",
+                    ""id"": ""c9ca11ae-7de7-49d0-9eb6-a2b7b3501bb5"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3bed6083-50b0-410c-9558-c631e1b5324a"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoverCamara"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -78,6 +105,9 @@ public class @InputControl : IInputActionCollection, IDisposable
         m_Moverse = asset.FindActionMap("Moverse", throwIfNotFound: true);
         m_Moverse_Move = m_Moverse.FindAction("Move", throwIfNotFound: true);
         m_Moverse_Run = m_Moverse.FindAction("Run", throwIfNotFound: true);
+        // Camara
+        m_Camara = asset.FindActionMap("Camara", throwIfNotFound: true);
+        m_Camara_MoverCamara = m_Camara.FindAction("MoverCamara", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -164,9 +194,46 @@ public class @InputControl : IInputActionCollection, IDisposable
         }
     }
     public MoverseActions @Moverse => new MoverseActions(this);
+
+    // Camara
+    private readonly InputActionMap m_Camara;
+    private ICamaraActions m_CamaraActionsCallbackInterface;
+    private readonly InputAction m_Camara_MoverCamara;
+    public struct CamaraActions
+    {
+        private @InputControl m_Wrapper;
+        public CamaraActions(@InputControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoverCamara => m_Wrapper.m_Camara_MoverCamara;
+        public InputActionMap Get() { return m_Wrapper.m_Camara; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CamaraActions set) { return set.Get(); }
+        public void SetCallbacks(ICamaraActions instance)
+        {
+            if (m_Wrapper.m_CamaraActionsCallbackInterface != null)
+            {
+                @MoverCamara.started -= m_Wrapper.m_CamaraActionsCallbackInterface.OnMoverCamara;
+                @MoverCamara.performed -= m_Wrapper.m_CamaraActionsCallbackInterface.OnMoverCamara;
+                @MoverCamara.canceled -= m_Wrapper.m_CamaraActionsCallbackInterface.OnMoverCamara;
+            }
+            m_Wrapper.m_CamaraActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MoverCamara.started += instance.OnMoverCamara;
+                @MoverCamara.performed += instance.OnMoverCamara;
+                @MoverCamara.canceled += instance.OnMoverCamara;
+            }
+        }
+    }
+    public CamaraActions @Camara => new CamaraActions(this);
     public interface IMoverseActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+    }
+    public interface ICamaraActions
+    {
+        void OnMoverCamara(InputAction.CallbackContext context);
     }
 }
