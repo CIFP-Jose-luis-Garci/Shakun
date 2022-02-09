@@ -25,9 +25,9 @@ public class DOT : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "Player")
+        if(other.gameObject.name == "Shonu")
         {
-           
+            print("AY");
             StartCoroutine("Damage");
         }
     }

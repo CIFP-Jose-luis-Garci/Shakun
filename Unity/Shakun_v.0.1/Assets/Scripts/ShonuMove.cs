@@ -23,6 +23,8 @@ public class ShonuMove : MonoBehaviour
 
     public static bool IsGrounded = true;
 
+    bool saltando = false;
+
     float AvaliableJump;
 
     public float AlturaSalto = 100f;
@@ -61,10 +63,12 @@ public class ShonuMove : MonoBehaviour
         inputcontrol.Moverse.Run.performed += ctx => { corriendo = true; };
         inputcontrol.Moverse.Run.canceled += ctx => { corriendo = false; };
 
+        //AtacandoL2
 
+        //Saltando
+        inputcontrol.Moverse.Saltar.performed += ctx => { saltando = true; };
+        inputcontrol.Moverse.Saltar.canceled += ctx => { saltando = false; };
 
-        
-        
     }
     // Start is called before the first frame update
     void Start()
@@ -82,15 +86,39 @@ public class ShonuMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movimiento();
+        if (Alive)
+        {
+            Movimiento();
+            Saltar();
+        }
+        else
+        {
+            animator.SetBool("DeathShonu", true);
+        }
+
+
 
         Gravity();
-        print(speed);
+       
+        print(AvaliableJump);
+
+        
+
         
     }
 
-    
-    
+    void TookDamage(int DamageTaken)
+    {
+        Vida -= DamageTaken;
+
+        print(Vida);
+
+        if (Vida <= 0)
+        {
+            Alive = false;
+        }
+    }
+
     void Movimiento()
     {
 
@@ -197,6 +225,33 @@ public class ShonuMove : MonoBehaviour
 
     }
 
+    void Saltar()
+    {
+
+        //Vector3 TrayecoriaSalto = new Vector3(0f, AlturaSalto, 0f);
+
+        //minetras esté en el suelo, rellena los saltos
+
+        if (controller.isGrounded)
+        {
+            AvaliableJump = 1;
+        }
+
+        //cuando se sapresione espacio, si quedan satos guardados, saltas, cambiando tu posicion vertical. && AvaliableJump >= 0
+
+        if (saltando && AvaliableJump >= 0)
+        {
+
+
+            velocity.y = 50;
+
+            controller.Move(velocity * Time.deltaTime * AlturaSalto);
+
+
+
+            AvaliableJump--;
+        }
+    }
 
 
     private void OnEnable()

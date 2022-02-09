@@ -33,6 +33,14 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Saltar"",
+                    ""type"": ""Button"",
+                    ""id"": ""d5a1e490-1376-4bc1-9314-bbf286d2ffa5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -66,6 +74,17 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10813b6b-7361-41af-ba40-c2fd669259fe"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Saltar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -105,6 +124,7 @@ public class @InputControl : IInputActionCollection, IDisposable
         m_Moverse = asset.FindActionMap("Moverse", throwIfNotFound: true);
         m_Moverse_Move = m_Moverse.FindAction("Move", throwIfNotFound: true);
         m_Moverse_Run = m_Moverse.FindAction("Run", throwIfNotFound: true);
+        m_Moverse_Saltar = m_Moverse.FindAction("Saltar", throwIfNotFound: true);
         // Camara
         m_Camara = asset.FindActionMap("Camara", throwIfNotFound: true);
         m_Camara_MoverCamara = m_Camara.FindAction("MoverCamara", throwIfNotFound: true);
@@ -159,12 +179,14 @@ public class @InputControl : IInputActionCollection, IDisposable
     private IMoverseActions m_MoverseActionsCallbackInterface;
     private readonly InputAction m_Moverse_Move;
     private readonly InputAction m_Moverse_Run;
+    private readonly InputAction m_Moverse_Saltar;
     public struct MoverseActions
     {
         private @InputControl m_Wrapper;
         public MoverseActions(@InputControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Moverse_Move;
         public InputAction @Run => m_Wrapper.m_Moverse_Run;
+        public InputAction @Saltar => m_Wrapper.m_Moverse_Saltar;
         public InputActionMap Get() { return m_Wrapper.m_Moverse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +202,9 @@ public class @InputControl : IInputActionCollection, IDisposable
                 @Run.started -= m_Wrapper.m_MoverseActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_MoverseActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_MoverseActionsCallbackInterface.OnRun;
+                @Saltar.started -= m_Wrapper.m_MoverseActionsCallbackInterface.OnSaltar;
+                @Saltar.performed -= m_Wrapper.m_MoverseActionsCallbackInterface.OnSaltar;
+                @Saltar.canceled -= m_Wrapper.m_MoverseActionsCallbackInterface.OnSaltar;
             }
             m_Wrapper.m_MoverseActionsCallbackInterface = instance;
             if (instance != null)
@@ -190,6 +215,9 @@ public class @InputControl : IInputActionCollection, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
+                @Saltar.started += instance.OnSaltar;
+                @Saltar.performed += instance.OnSaltar;
+                @Saltar.canceled += instance.OnSaltar;
             }
         }
     }
@@ -231,6 +259,7 @@ public class @InputControl : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnSaltar(InputAction.CallbackContext context);
     }
     public interface ICamaraActions
     {
