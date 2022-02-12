@@ -116,6 +116,71 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Ataques"",
+            ""id"": ""e580b26b-e0f3-4898-b8d2-28b1425073c6"",
+            ""actions"": [
+                {
+                    ""name"": ""L2"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e23c6e6-a546-4afc-9378-b007740f6f8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""R2"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3e4ca2b-f5b1-4057-a712-24df50e8d9f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""L1"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6442a79-be02-436e-b260-4a9f8a142a7e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""859a3213-d679-4fbc-9e6a-15ce192bbbec"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""L2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0647a49-02b4-4963-ac35-d3c5e13521fd"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92d71d93-0e82-41ad-9216-55c53c97f913"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""L1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -128,6 +193,11 @@ public class @InputControl : IInputActionCollection, IDisposable
         // Camara
         m_Camara = asset.FindActionMap("Camara", throwIfNotFound: true);
         m_Camara_MoverCamara = m_Camara.FindAction("MoverCamara", throwIfNotFound: true);
+        // Ataques
+        m_Ataques = asset.FindActionMap("Ataques", throwIfNotFound: true);
+        m_Ataques_L2 = m_Ataques.FindAction("L2", throwIfNotFound: true);
+        m_Ataques_R2 = m_Ataques.FindAction("R2", throwIfNotFound: true);
+        m_Ataques_L1 = m_Ataques.FindAction("L1", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -255,6 +325,55 @@ public class @InputControl : IInputActionCollection, IDisposable
         }
     }
     public CamaraActions @Camara => new CamaraActions(this);
+
+    // Ataques
+    private readonly InputActionMap m_Ataques;
+    private IAtaquesActions m_AtaquesActionsCallbackInterface;
+    private readonly InputAction m_Ataques_L2;
+    private readonly InputAction m_Ataques_R2;
+    private readonly InputAction m_Ataques_L1;
+    public struct AtaquesActions
+    {
+        private @InputControl m_Wrapper;
+        public AtaquesActions(@InputControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @L2 => m_Wrapper.m_Ataques_L2;
+        public InputAction @R2 => m_Wrapper.m_Ataques_R2;
+        public InputAction @L1 => m_Wrapper.m_Ataques_L1;
+        public InputActionMap Get() { return m_Wrapper.m_Ataques; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(AtaquesActions set) { return set.Get(); }
+        public void SetCallbacks(IAtaquesActions instance)
+        {
+            if (m_Wrapper.m_AtaquesActionsCallbackInterface != null)
+            {
+                @L2.started -= m_Wrapper.m_AtaquesActionsCallbackInterface.OnL2;
+                @L2.performed -= m_Wrapper.m_AtaquesActionsCallbackInterface.OnL2;
+                @L2.canceled -= m_Wrapper.m_AtaquesActionsCallbackInterface.OnL2;
+                @R2.started -= m_Wrapper.m_AtaquesActionsCallbackInterface.OnR2;
+                @R2.performed -= m_Wrapper.m_AtaquesActionsCallbackInterface.OnR2;
+                @R2.canceled -= m_Wrapper.m_AtaquesActionsCallbackInterface.OnR2;
+                @L1.started -= m_Wrapper.m_AtaquesActionsCallbackInterface.OnL1;
+                @L1.performed -= m_Wrapper.m_AtaquesActionsCallbackInterface.OnL1;
+                @L1.canceled -= m_Wrapper.m_AtaquesActionsCallbackInterface.OnL1;
+            }
+            m_Wrapper.m_AtaquesActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @L2.started += instance.OnL2;
+                @L2.performed += instance.OnL2;
+                @L2.canceled += instance.OnL2;
+                @R2.started += instance.OnR2;
+                @R2.performed += instance.OnR2;
+                @R2.canceled += instance.OnR2;
+                @L1.started += instance.OnL1;
+                @L1.performed += instance.OnL1;
+                @L1.canceled += instance.OnL1;
+            }
+        }
+    }
+    public AtaquesActions @Ataques => new AtaquesActions(this);
     public interface IMoverseActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -264,5 +383,11 @@ public class @InputControl : IInputActionCollection, IDisposable
     public interface ICamaraActions
     {
         void OnMoverCamara(InputAction.CallbackContext context);
+    }
+    public interface IAtaquesActions
+    {
+        void OnL2(InputAction.CallbackContext context);
+        void OnR2(InputAction.CallbackContext context);
+        void OnL1(InputAction.CallbackContext context);
     }
 }

@@ -103,6 +103,71 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Ataques",
+            "id": "e580b26b-e0f3-4898-b8d2-28b1425073c6",
+            "actions": [
+                {
+                    "name": "L2",
+                    "type": "Button",
+                    "id": "8e23c6e6-a546-4afc-9378-b007740f6f8d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "R2",
+                    "type": "Button",
+                    "id": "f3e4ca2b-f5b1-4057-a712-24df50e8d9f1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "L1",
+                    "type": "Button",
+                    "id": "e6442a79-be02-436e-b260-4a9f8a142a7e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "859a3213-d679-4fbc-9e6a-15ce192bbbec",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "L2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0647a49-02b4-4963-ac35-d3c5e13521fd",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "R2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92d71d93-0e82-41ad-9216-55c53c97f913",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "L1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

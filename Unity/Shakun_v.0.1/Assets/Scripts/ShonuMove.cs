@@ -31,13 +31,30 @@ public class ShonuMove : MonoBehaviour
 
     public float Dash = 10f;
 
+    //L2 variables
     public GameObject NL2;
-
     public float NL2AttackTime = 1f;
+    bool L2Switch = false;
+
+   //NR2Attaack
+    public GameObject NR2;
+    public float NR2AttackTime = 2;
+    float DashActive = 0;
+    bool R2Switch = false;
+
+    //NL1Attack
+    public GameObject NL1;
+    public float NL1AttackTime = 4;
+    public GameObject NL1Strong;
+    bool L1Switch = false;
+
 
     public static int Vida;
 
     public bool Alive = true;
+
+    public bool IsAttacking = false;
+
 
     Animator animator;
 
@@ -48,6 +65,8 @@ public class ShonuMove : MonoBehaviour
     Vector3 dir;
 
     Vector2 MovePos;
+
+
 
    
     private void Awake()
@@ -64,10 +83,22 @@ public class ShonuMove : MonoBehaviour
         inputcontrol.Moverse.Run.canceled += ctx => { corriendo = false; };
 
         //AtacandoL2
+        inputcontrol.Ataques.L2.started += ctx => { L2Switch = true; };
+        inputcontrol.Ataques.L2.canceled += ctx => { L2Switch = false; };
+
+        //atacandoR2
+        inputcontrol.Ataques.R2.started += ctx => { R2Switch = true; };
+        inputcontrol.Ataques.R2.canceled += ctx => { R2Switch = false; };
+
+        //atacandoL1
+        inputcontrol.Ataques.L1.started += ctx => { L1Switch = true; };
+        inputcontrol.Ataques.L1.canceled += ctx => { L1Switch = false; };
 
         //Saltando
         inputcontrol.Moverse.Saltar.performed += ctx => { saltando = true; };
         inputcontrol.Moverse.Saltar.canceled += ctx => { saltando = false; };
+
+
 
     }
     // Start is called before the first frame update
@@ -86,10 +117,15 @@ public class ShonuMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (Alive)
         {
             Movimiento();
             Saltar();
+            AttackNL2();
+            AttackR2();
+            AttackNL1();
         }
         else
         {
@@ -99,11 +135,7 @@ public class ShonuMove : MonoBehaviour
 
 
         Gravity();
-       
-        print(AvaliableJump);
-
-        
-
+     
         
     }
 
@@ -152,11 +184,11 @@ public class ShonuMove : MonoBehaviour
 
         Vector3 Movement = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
-        if (Dirección.magnitude >= 0.1)
+        if (Dirección.magnitude >= 0.1 && IsAttacking == false)
         {
             
 
-            controller.Move(Movement.normalized * speed * Time.deltaTime);
+            controller.Move(Movement.normalized * speed * Time.deltaTime );
 
             //rb.AddForce(Movement.normalized * speed * Time.deltaTime);
 
@@ -252,6 +284,106 @@ public class ShonuMove : MonoBehaviour
             AvaliableJump--;
         }
     }
+
+
+    void AttackNL2()
+    {
+        if (L2Switch == true && IsAttacking == false)
+        {
+            IsAttacking = true;
+
+            NL2.gameObject.SetActive(true);
+
+            Invoke("StopNL2", NL2AttackTime);
+
+            
+
+        }
+    }
+    void StopNL2()
+    {
+        NL2.gameObject.SetActive(false);
+        
+        IsAttacking = false;
+    }
+
+    void AttackR2()
+    {
+        if ( R2Switch == true && IsAttacking == false)
+        {
+            IsAttacking = true;
+
+            NR2.gameObject.SetActive(true);
+
+            //Invoke("DashNR2", 1.5f);
+
+
+
+            Invoke("StopNR2", NR2AttackTime);
+        }
+    }
+
+    void StopNR2()
+    {
+        while (Time.time < DashActive)
+        {
+            Vector3 Backdash = transform.TransformDirection(Vector3.back);
+
+            DashActive = Time.time + 10;
+
+            controller.SimpleMove(Backdash * Dash);
+
+
+        }
+
+
+
+        NR2.gameObject.SetActive(false);
+
+        IsAttacking = false;
+    }
+
+    void AttackNL1()
+    {
+        if (L1Switch==true && IsAttacking == false)
+        {
+            print("WWW");
+
+            IsAttacking = true;
+
+            NL1.gameObject.SetActive(true);
+
+            // StartCoroutine("NL1Frequency");
+
+            //Invoke("DashNR2", 1.5f);
+
+
+
+            Invoke("StopNL1", NL1AttackTime);
+
+        }
+
+    }
+
+    void StopNL1()
+    {
+        NL1.gameObject.SetActive(false);
+
+        NL1Strong.gameObject.SetActive(true);
+
+        Invoke("StopNL1Strong", 1);
+
+        IsAttacking = false;
+
+
+    }
+
+    void StopNL1Strong()
+    {
+        NL1Strong.gameObject.SetActive(false);
+
+    }
+
 
 
     private void OnEnable()

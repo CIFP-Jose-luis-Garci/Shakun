@@ -3577,7 +3577,7 @@ GameObject:
   - component: {fileID: 8140993145286801796}
   m_Layer: 0
   m_Name: Shonu 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3614,7 +3614,7 @@ CharacterController:
   m_Height: 6.9
   m_Radius: 1
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 3.48, z: 0}
@@ -7671,7 +7671,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8140993143423313214}
-  m_LocalRotation: {x: 0.17327447, y: 0.19667771, z: -0.035337646, w: 0.9643885}
+  m_LocalRotation: {x: 0.1702723, y: 0.26576465, z: -0.0477507, w: 0.9476795}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7745,7 +7745,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8140993143461865410}
-  m_LocalRotation: {x: 0.17327446, y: 0.1966777, z: -0.035337653, w: 0.9643885}
+  m_LocalRotation: {x: 0.17027228, y: 0.26576465, z: -0.047750697, w: 0.94767946}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7819,7 +7819,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8140993143662350258}
-  m_LocalRotation: {x: 0.17327447, y: 0.19667771, z: -0.035337646, w: 0.9643885}
+  m_LocalRotation: {x: 0.17027228, y: 0.26576462, z: -0.04775069, w: 0.94767946}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

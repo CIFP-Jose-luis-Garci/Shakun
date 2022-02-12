@@ -9,11 +9,11 @@ public class CharacterHit : MonoBehaviour
 
     //public float AttackCooldown;
 
-    public LayerMask Enemigos;
+    //public LayerMask Enemigos;
 
-    public LayerMask Objetos;
+    //public LayerMask Objetos;
 
-    public GameObject Enemy;
+    //public GameObject Enemy;
     
    
     
@@ -22,23 +22,14 @@ public class CharacterHit : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-      
-        
-    }
-
-    
-     
     
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 6)
+        if(other.gameObject.layer == 7)
         {
             print("AA");
             
-            Enemy.gameObject.SendMessage("Stun", 3f);
+            other.gameObject.SendMessage("Stun", 3f);
         }
     }
 
