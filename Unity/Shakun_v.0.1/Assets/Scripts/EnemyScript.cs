@@ -6,6 +6,9 @@ using UnityEngine.AI;
 public class EnemyScript : MonoBehaviour
 {
 
+    //GAMEOBJECT GRANDE
+    GameObject EnemyComp;
+
     //Contador de vida
     float vida = 20;
     //switch para saber si sigue con vida
@@ -38,7 +41,7 @@ public class EnemyScript : MonoBehaviour
     Rigidbody rb;
 
     //Componente Animator
-    //Animator animator;
+    Animator animator;
 
     //Sonidos
     [SerializeField] AudioClip groar1;
@@ -48,17 +51,25 @@ public class EnemyScript : MonoBehaviour
     float visionRange = 30f; //10 metros de visión
     float visionConeAngle = 60f; //60º de angulo de visión
 
+    GameObject Hitbox;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
         agent = GetComponent<NavMeshAgent>();
-        //animator = GetComponent<Animator>();
+        
+        animator = GetComponent<Animator>();
 
         audioSource = GetComponent<AudioSource>();
 
-        Shonu = GameObject.Find("Shonu").transform;
+        Shonu = GameObject.Find("Shonu 2").transform;
+
+        EnemyComp = this.transform.parent.gameObject;
+
+        
+        Hitbox = this.transform.GetChild(33).gameObject;
 
         //Iniciamos la corrutina que hace que se mueva aleatoriamiente
         StartCoroutine("Ronda");
@@ -69,9 +80,13 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
+
+
         rb.AddForce(Physics.gravity * 10);
         
-        if(Stunned == false)
+        if(Stunned == false && Alive)
         {
             //Función que permite detectar al jugador
             Detectar();
@@ -161,7 +176,23 @@ public class EnemyScript : MonoBehaviour
                 //audioSource.Play();
             }
             
-        }
+            if (distanceToPlayer < 2)
+            {
+                animator.SetBool("IsAttacking", true);
+                gameObject.GetComponent<NavMeshAgent>().isStopped = true;
+                
+                Hitbox.SetActive(true);
+
+                Invoke("FinishAttack", 1);
+
+            }
+            else
+            {
+                animator.SetBool("IsAttacking", false);
+                gameObject.GetComponent<NavMeshAgent>().isStopped = false;
+            }
+        
+        }   
         else
         {
             if (pillado)
@@ -179,15 +210,33 @@ public class EnemyScript : MonoBehaviour
 
     }
 
+
+    void FinishAttack()
+    {
+        Hitbox.SetActive(false);
+    }
+
     void DamageTaker(int Damage)
     {
        if(vida > 0)
         {
             vida -= Damage;
+            animator.SetBool("DeathEnemigo", false);
         }
+
+        if (vida <= 0)
+        {
+            Alive = false;
+
+            animator.SetBool("DeathEnemigo", true);
+
+            ShopEvent.CoinCount += 1;
+        }
+
+        Shonu.SendMessage("AddMana", Damage / 2);
         
         
-        
+        print(vida);
     }
 
 
@@ -195,7 +244,7 @@ public class EnemyScript : MonoBehaviour
     public void Stun(int StunTime)
     {
 
-        gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        gameObject.GetComponent<NavMeshAgent>().isStopped = true;
 
 
 
@@ -203,7 +252,7 @@ public class EnemyScript : MonoBehaviour
         
         Stunned = true;
 
-        gameObject.GetComponent<Renderer>().material.color = Color.blue;
+        //gameObject.GetComponent<Renderer>().material.color = Color.blue;
 
         Invoke("Stunrelease", StunTime);
     }
@@ -232,11 +281,15 @@ public class EnemyScript : MonoBehaviour
 
     void Stunrelease()
     {
-        gameObject.GetComponent<Renderer>().material.color = Color.red;
+        // gameObject.GetComponent<Renderer>().material.color = Color.red;
+
+        gameObject.GetComponent<NavMeshAgent>().isStopped = false;
+
+        EnemyComp.SendMessage("EnableNavMesh");
 
         Stunned = false;
 
-        gameObject.GetComponent<NavMeshAgent>().enabled = true;
+        
     }
 
     void KnockBack(int KnockbackForce)

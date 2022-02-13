@@ -30,6 +30,7 @@ public class CharacterHit : MonoBehaviour
             print("AA");
             
             other.gameObject.SendMessage("Stun", 3f);
+            other.gameObject.SendMessage("DamageTaker",5);
         }
     }
 

@@ -26,6 +26,7 @@ public class BL1Hit : MonoBehaviour
         if (other.gameObject.layer == 7)
         {
             other.gameObject.SendMessage("Stun", 4);
+            other.gameObject.SendMessage("DamageTaker", 2);
         }
     }
 }

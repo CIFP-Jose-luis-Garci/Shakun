@@ -30,6 +30,8 @@ public class NR2Hit : MonoBehaviour
             other.gameObject.SendMessage("KnockBack", 500);
 
             other.gameObject.SendMessage("KnockBackY", 400);
+
+            other.gameObject.SendMessage("DamageTaker", 7);
         }
     }
 

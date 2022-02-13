@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NL1StrongHit : MonoBehaviour
+public class EnemyHit : MonoBehaviour
 {
-    
-
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,17 +13,19 @@ public class NL1StrongHit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 7)
+        if(other.gameObject.layer == 8)
         {
-            other.gameObject.SendMessage("KnockBack", 400);
-            other.gameObject.SendMessage("KnockBackY", 1000);
-            other.gameObject.SendMessage("DamageTaker", 10);
+            print("MePAGO");
+            other.SendMessage("TookDamage", 7);
         }
     }
+
+
+
+
 }
