@@ -21,7 +21,7 @@ public class EnemyHit : MonoBehaviour
         if(other.gameObject.layer == 8)
         {
             print("MePAGO");
-            other.SendMessage("TookDamage", 7);
+            other.SendMessage("TookDamage", 3);
         }
     }
 

@@ -27,7 +27,7 @@ public class ShonuMove : MonoBehaviour
 
     float AvaliableJump;
 
-    public float AlturaSalto = 100f;
+    public float AlturaSalto = 30f;
 
     public float Dash = 10f;
 
@@ -51,7 +51,7 @@ public class ShonuMove : MonoBehaviour
 
     public static int Vida;
 
-    public bool Alive = true;
+    public static bool Alive = true;
 
     public bool IsAttacking = false;
 
@@ -134,7 +134,7 @@ public class ShonuMove : MonoBehaviour
             Saltar();
             AttackNL2();
             AttackR2();
-            AttackNL1();
+            //AttackNL1();
         }
         else
         {
@@ -208,7 +208,7 @@ public class ShonuMove : MonoBehaviour
 
         float SmoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref TurnSmothness, TurnSmothTime);
 
-        if(MovePos.y > 0)
+        if (MovePos.y > 0 && IsAttacking == false)
         {
             transform.rotation = Quaternion.Euler(0f, SmoothAngle, 0f);
         }
@@ -355,15 +355,14 @@ public class ShonuMove : MonoBehaviour
 
             animator.SetBool("IsAttackingR2", true);
 
-            Invoke("AttackR2Cast", 2);
+            Invoke("AttackR2Cast", 2.5f);
             
         }
     }
 
     void AttackR2Cast()
     {
-        print("tumama");
-
+       
         NR2.gameObject.SetActive(true);
 
         //Invoke("DashNR2", 1.5f);
@@ -373,10 +372,25 @@ public class ShonuMove : MonoBehaviour
 
         animator.SetBool("IsAttackingR2", false);
 
-        IsAttacking = false;
+        Invoke("NR2DashFinish", 1.1f);
+
+        
     }
 
+    void NR2DashFinish()
+    {
+        Vector3 FowardDash = transform.TransformDirection(Vector3.forward);
+
+        controller.Move(FowardDash * 8);
+
+        NR2.gameObject.SetActive(false);
+
+        IsAttacking = false;
+
+       
+    }
     
+    /*
     void StopNR2()
     {
         while (Time.time < DashActive)
@@ -398,9 +412,9 @@ public class ShonuMove : MonoBehaviour
 
         IsAttacking = false;
     }
-    
+    */
 
-
+    /*
     void AttackNL1()
     {
         if (L1Switch==true && IsAttacking == false && Mana >= 30)
@@ -442,7 +456,7 @@ public class ShonuMove : MonoBehaviour
 
     }
 
-
+    */
 
     private void OnEnable()
     {

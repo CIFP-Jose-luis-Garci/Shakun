@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
+    
+
 
     //GAMEOBJECT GRANDE
     GameObject EnemyComp;
@@ -48,10 +50,15 @@ public class EnemyScript : MonoBehaviour
     AudioSource audioSource;
 
     //Variables para detectar al jugador
-    float visionRange = 30f; //10 metros de visión
-    float visionConeAngle = 60f; //60º de angulo de visión
+    float visionRange = 50f; //10 metros de visión
+    float visionConeAngle = 80f; //60º de angulo de visión
 
     GameObject Hitbox;
+
+    BoxCollider HurtBox;
+
+    //Si es pegao te busca aunque te pierda
+    bool HasBeenHit = false;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +78,9 @@ public class EnemyScript : MonoBehaviour
         
         Hitbox = this.transform.GetChild(33).gameObject;
 
+        HurtBox = GetComponent<BoxCollider>();
+
+        HurtBox.isTrigger = false;
         //Iniciamos la corrutina que hace que se mueva aleatoriamiente
         StartCoroutine("Ronda");
 
@@ -158,12 +168,12 @@ public class EnemyScript : MonoBehaviour
         float angleToPlayer = Vector3.Angle(transform.forward, vectorToPlayer);
 
         //creamos un raycats para comprobar si está detras de un objeto
-        
+
 
 
 
         //Si estÃ¡ en mi rango y en mi Ã¡ngulo de visiÃ³n
-        if ((distanceToPlayer <= visionRange && angleToPlayer <= visionConeAngle))
+        if ((distanceToPlayer <= visionRange && angleToPlayer <= visionConeAngle) || HasBeenHit == true)
         {
             
             
@@ -176,7 +186,7 @@ public class EnemyScript : MonoBehaviour
                 //audioSource.Play();
             }
             
-            if (distanceToPlayer < 2)
+            if (distanceToPlayer < 2 && ShonuMove.Alive == true)
             {
                 animator.SetBool("IsAttacking", true);
                 gameObject.GetComponent<NavMeshAgent>().isStopped = true;
@@ -218,10 +228,18 @@ public class EnemyScript : MonoBehaviour
 
     void DamageTaker(int Damage)
     {
-       if(vida > 0)
+        animator.SetBool("IsGettingHit", false);
+
+        HasBeenHit = true;
+
+        if (vida > 0)
         {
             vida -= Damage;
             animator.SetBool("DeathEnemigo", false);
+
+            animator.SetBool("IsGettingHit", true);
+
+            StartCoroutine("HurtAnim");
         }
 
         if (vida <= 0)
@@ -231,6 +249,11 @@ public class EnemyScript : MonoBehaviour
             animator.SetBool("DeathEnemigo", true);
 
             ShopEvent.CoinCount += 1;
+
+            //rb.gameObject.SetActive(false);
+
+            HurtBox.isTrigger = true;
+            
         }
 
         Shonu.SendMessage("AddMana", Damage / 2);
@@ -239,7 +262,14 @@ public class EnemyScript : MonoBehaviour
         print(vida);
     }
 
+    IEnumerator HurtAnim()
+    {
 
+        yield return new WaitForSeconds(0.5f);
+        
+        animator.SetBool("IsGettingHit", false);
+
+    }
 
     public void Stun(int StunTime)
     {
