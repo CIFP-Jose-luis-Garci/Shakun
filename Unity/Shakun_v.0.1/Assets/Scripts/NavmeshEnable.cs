@@ -15,7 +15,7 @@ public class NavmeshEnable : MonoBehaviour
 
     void EnableNavMesh()
     {
-        print("AAAawmd");
+        
         
         Enemy.GetComponent<NavmeshEnable>();
     }

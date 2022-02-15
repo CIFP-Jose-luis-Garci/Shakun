@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShonuMove : MonoBehaviour
 {
@@ -71,6 +72,7 @@ public class ShonuMove : MonoBehaviour
 
     int Invuln = 5;
 
+    bool IsOnMenu;
     
    
     private void Awake()
@@ -111,9 +113,9 @@ public class ShonuMove : MonoBehaviour
         animator = GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
 
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
 
-        Cursor.visible = true;
+       // Cursor.visible = true;
 
         
 
@@ -126,9 +128,9 @@ public class ShonuMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        IsOnMenu = ScriptsMenu.PauseSwitch;
 
-        if (Alive )
+        if (Alive && IsOnMenu == false)
         {
             Movimiento();
             Saltar();
@@ -136,7 +138,7 @@ public class ShonuMove : MonoBehaviour
             AttackR2();
             //AttackNL1();
         }
-        else
+        else if(Alive == false)
         {
             animator.SetBool("DeathShonu", true);
         }
@@ -166,6 +168,8 @@ public class ShonuMove : MonoBehaviour
         if (Vida <= 0)
         {
             Alive = false;
+
+            StartCoroutine("ShonuDeath");
         }
     }
 
@@ -494,5 +498,13 @@ public class ShonuMove : MonoBehaviour
         Mana += ManaValue;
     }
 
+
+    IEnumerator ShonuDeath()
+    {
+        yield return new WaitForSeconds(4);
+
+
+        SceneManager.LoadScene(6);
+    }
 
 }

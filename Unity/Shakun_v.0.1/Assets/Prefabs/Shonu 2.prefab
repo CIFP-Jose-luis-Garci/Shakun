@@ -709,7 +709,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1157658537936943395}
-  m_LocalRotation: {x: 0.17174192, y: 0.23465066, z: -0.042160355, w: 0.95585895}
+  m_LocalRotation: {x: 0.17000076, y: 0.27109635, z: -0.04870868, w: 0.94616807}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -783,7 +783,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1157658537965501407}
-  m_LocalRotation: {x: 0.17174195, y: 0.23465066, z: -0.042160366, w: 0.95585895}
+  m_LocalRotation: {x: 0.17000076, y: 0.27109635, z: -0.04870868, w: 0.94616807}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -857,7 +857,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1157658538033304495}
-  m_LocalRotation: {x: 0.17174192, y: 0.23465066, z: -0.042160355, w: 0.95585895}
+  m_LocalRotation: {x: 0.17000076, y: 0.27109635, z: -0.04870868, w: 0.94616807}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6332,7 +6332,7 @@ CharacterController:
   m_Height: 6.9
   m_Radius: 1
   m_SlopeLimit: 45
-  m_StepOffset: 3
+  m_StepOffset: 2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 3.48, z: 0}
@@ -6380,7 +6380,6 @@ MonoBehaviour:
   NL1: {fileID: 1157658539710655926}
   NL1AttackTime: 4
   NL1Strong: {fileID: 1157658539442668107}
-  Alive: 1
   IsAttacking: 0
 --- !u!65 &1157658539139185444
 BoxCollider:

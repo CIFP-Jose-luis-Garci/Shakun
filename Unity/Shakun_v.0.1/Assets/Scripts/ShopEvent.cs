@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ShopEvent : MonoBehaviour
 {
@@ -42,10 +43,20 @@ public class ShopEvent : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            HudText.gameObject.SetActive(true);
-            HudMoney.gameObject.SetActive(true);
-            
-            WantsMoney = true;
+           
+            if(CoinCount >= 4)
+            {
+                SceneManager.LoadScene(6);
+            }
+            else
+            {
+                HudText.gameObject.SetActive(true);
+                HudMoney.gameObject.SetActive(true);
+
+                WantsMoney = true;
+
+            }
+
         }
     }
 

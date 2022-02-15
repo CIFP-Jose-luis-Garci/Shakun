@@ -181,6 +181,60 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""adbcf254-189a-4441-be0c-0a364836c2b4"",
+            ""actions"": [
+                {
+                    ""name"": ""Pausa"",
+                    ""type"": ""Button"",
+                    ""id"": ""b311b3e9-329f-497a-bc1d-80bf28da8b20"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""96a07b76-a0cf-4129-800e-155447d5cb0f"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pausa"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""80a24c76-e791-430f-a127-d97a00c1ba1f"",
+            ""actions"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""type"": ""Value"",
+                    ""id"": ""57d3ae80-3eaf-4d45-bd92-60fbbb200af5"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0717e502-c0c3-4930-9395-64b12a20957b"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -198,6 +252,12 @@ public class @InputControl : IInputActionCollection, IDisposable
         m_Ataques_L2 = m_Ataques.FindAction("L2", throwIfNotFound: true);
         m_Ataques_R2 = m_Ataques.FindAction("R2", throwIfNotFound: true);
         m_Ataques_L1 = m_Ataques.FindAction("L1", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Pausa = m_Menu.FindAction("Pausa", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -374,6 +434,72 @@ public class @InputControl : IInputActionCollection, IDisposable
         }
     }
     public AtaquesActions @Ataques => new AtaquesActions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_Pausa;
+    public struct MenuActions
+    {
+        private @InputControl m_Wrapper;
+        public MenuActions(@InputControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pausa => m_Wrapper.m_Menu_Pausa;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+            {
+                @Pausa.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPausa;
+                @Pausa.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPausa;
+                @Pausa.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPausa;
+            }
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Pausa.started += instance.OnPausa;
+                @Pausa.performed += instance.OnPausa;
+                @Pausa.canceled += instance.OnPausa;
+            }
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Navigate;
+    public struct UIActions
+    {
+        private @InputControl m_Wrapper;
+        public UIActions(@InputControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @Navigate.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
+                @Navigate.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
+                @Navigate.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Navigate.started += instance.OnNavigate;
+                @Navigate.performed += instance.OnNavigate;
+                @Navigate.canceled += instance.OnNavigate;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IMoverseActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -389,5 +515,13 @@ public class @InputControl : IInputActionCollection, IDisposable
         void OnL2(InputAction.CallbackContext context);
         void OnR2(InputAction.CallbackContext context);
         void OnL1(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnPausa(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnNavigate(InputAction.CallbackContext context);
     }
 }

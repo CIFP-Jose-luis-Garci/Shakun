@@ -46,8 +46,7 @@ public class EnemyScript : MonoBehaviour
     Animator animator;
 
     //Sonidos
-    [SerializeField] AudioClip groar1;
-    AudioSource audioSource;
+    
 
     //Variables para detectar al jugador
     float visionRange = 50f; //10 metros de visión
@@ -56,6 +55,9 @@ public class EnemyScript : MonoBehaviour
     GameObject Hitbox;
 
     BoxCollider HurtBox;
+
+
+    bool IsOnMenu;
 
     //Si es pegao te busca aunque te pierda
     bool HasBeenHit = false;
@@ -69,7 +71,7 @@ public class EnemyScript : MonoBehaviour
         
         animator = GetComponent<Animator>();
 
-        audioSource = GetComponent<AudioSource>();
+       
 
         Shonu = GameObject.Find("Shonu 2").transform;
 
@@ -90,55 +92,65 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(agent.speed >= 0)
-        {
-            animator.SetBool("WalkEnemigo", true);
-        }
-        else
-        {
-            animator.SetBool("WalkEnemigo", false)  ;
-        }
         
+        IsOnMenu = ScriptsMenu.PauseSwitch;
 
-
-        rb.AddForce(Physics.gravity * 10);
         
-        if(Stunned == false && Alive)
-        {
-            //Función que permite detectar al jugador
-            Detectar();
-
-
-            if (detected)
+        
+            if (agent.speed >= 0)
             {
-
-                goal = Shonu.position;
-
+                animator.SetBool("WalkEnemigo", true);
             }
             else
             {
-                goal = emptyGoal.position;
-
+                animator.SetBool("WalkEnemigo", false);
             }
 
-            distance = Vector3.Distance(transform.position, goal);
 
 
+            rb.AddForce(Physics.gravity * 10);
 
-            if (distance > 2f)
+            if (Stunned == false && Alive)
             {
-                agent.speed = 5f;
+                //Función que permite detectar al jugador
+                Detectar();
+
+
+                if (detected)
+                {
+
+                    goal = Shonu.position;
+
+                }
+                else
+                {
+                    goal = emptyGoal.position;
+
+                }
+
+                distance = Vector3.Distance(transform.position, goal);
+
+
+
+                if (distance > 2f)
+                {
+                    agent.speed = 5f;
+                }
+                else
+                {
+                    agent.speed = 0f;
+                }
+                agent.SetDestination(goal);
             }
             else
             {
-                agent.speed = 0f;
-            }
-            agent.SetDestination(goal);
-        }
-       else
-       {
 
-       }
+            }
+       
+
+
+
+       
     }
 
     IEnumerator Ronda()
