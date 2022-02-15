@@ -27,7 +27,7 @@ public class ShonuMove : MonoBehaviour
 
     float AvaliableJump;
 
-    public float AlturaSalto = 30f;
+    public float AlturaSalto = 0f;
 
     public float Dash = 10f;
 
@@ -307,7 +307,7 @@ public class ShonuMove : MonoBehaviour
         {
 
 
-            velocity.y = 50;
+            velocity.y = 20;
 
             controller.Move(velocity * Time.deltaTime * AlturaSalto);
 
@@ -379,9 +379,7 @@ public class ShonuMove : MonoBehaviour
 
     void NR2DashFinish()
     {
-        Vector3 FowardDash = transform.TransformDirection(Vector3.forward);
-
-        controller.Move(FowardDash * 8);
+        
 
         NR2.gameObject.SetActive(false);
 

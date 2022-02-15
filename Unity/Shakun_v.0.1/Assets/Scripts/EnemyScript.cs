@@ -90,7 +90,14 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(agent.speed >= 0)
+        {
+            animator.SetBool("WalkEnemigo", true);
+        }
+        else
+        {
+            animator.SetBool("WalkEnemigo", false)  ;
+        }
         
 
 
