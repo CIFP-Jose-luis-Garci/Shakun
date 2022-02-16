@@ -489,7 +489,7 @@ public class ShonuMove : MonoBehaviour
             
             Mana += 0.6f;
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
