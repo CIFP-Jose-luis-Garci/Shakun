@@ -7,7 +7,11 @@ public class GameOverMenuScript : MonoBehaviour
 {
     public void Volver()
     {
+        
+        ShonuMove.Vida = 50;
+        ShonuMove.Alive = true;
         SceneManager.LoadScene(3);
+        
     }
 
     public void Salir()

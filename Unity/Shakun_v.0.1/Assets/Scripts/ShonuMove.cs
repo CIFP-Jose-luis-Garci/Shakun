@@ -50,7 +50,7 @@ public class ShonuMove : MonoBehaviour
     bool L1Switch = false;
 
 
-    public static int Vida;
+    public static int Vida = 50;
 
     public static bool Alive = true;
 
@@ -119,7 +119,7 @@ public class ShonuMove : MonoBehaviour
 
         
 
-        Vida = 50;
+        
         Mana = 100;
 
         StartCoroutine("ManaRegen");
@@ -489,7 +489,7 @@ public class ShonuMove : MonoBehaviour
             
             Mana += 0.6f;
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
         }
     }
 
