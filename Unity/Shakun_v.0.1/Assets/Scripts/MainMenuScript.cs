@@ -7,6 +7,8 @@ public class MainMenuScript : MonoBehaviour
 {
    public void Jugar()
     {
+        ShonuMove.Vida = 50;
+        ShonuMove.Alive = true;
         SceneManager.LoadScene(3);
     }
 
