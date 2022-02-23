@@ -52,6 +52,11 @@ public class ShonuManage : MonoBehaviour
 
     void ChangeToNormal()
     {
+
+        ShonuN.transform.position = ShonuA.transform.position;
+
+        
+
         ShonuN.gameObject.SetActive(true);
         ShonuA.gameObject.SetActive(false);
 
@@ -61,6 +66,10 @@ public class ShonuManage : MonoBehaviour
 
     void ChangeToWater()
     {
+        ShonuA.transform.position = ShonuN.transform.position;
+
+        
+
         ShonuN.gameObject.SetActive(false);
         ShonuA.gameObject.SetActive(true);
 
