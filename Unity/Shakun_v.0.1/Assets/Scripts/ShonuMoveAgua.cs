@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ShonuMove : MonoBehaviour
+public class ShonuMoveAgua : MonoBehaviour
 {
     InputControl inputcontrol;
 
@@ -33,27 +33,23 @@ public class ShonuMove : MonoBehaviour
     public float Dash = 10f;
     float DashTime = 0.5f;
 
-    //L2 variables
-    public GameObject NL2;
-    public float NL2AttackTime = 1f;
-    bool L2Switch = false;
+    //AL2Attack
+    public GameObject AL2;
+    public float AL2AttackTime = 1f;
+    bool AL2Switch = false;
 
-   //NR2Attaack
-    public GameObject NR2;
-    public float NR2AttackTime = 0.1f;
-    float DashActive = 0;
-    bool R2Switch = false;
-
-    //NL1Attack
-    public GameObject NL1;
-    public float NL1AttackTime = 4;
-    public GameObject NL1Strong;
-    bool L1Switch = false;
+    //NR2Attaack
+    public GameObject AR2;
+    public float AR2AttackTime = 0.1f;
+    bool AR2Switch = false;
 
 
-    int VidaNormal;
 
-    
+
+    int VidaAgua;
+
+    public static bool Alive = true;
+
     public bool IsAttacking = false;
 
     public static float Mana;
@@ -73,8 +69,8 @@ public class ShonuMove : MonoBehaviour
     int Invuln = 5;
 
     bool IsOnMenu;
-    
-   
+
+
     private void Awake()
     {
         inputcontrol = new InputControl();
@@ -89,16 +85,14 @@ public class ShonuMove : MonoBehaviour
         inputcontrol.Moverse.Run.canceled += ctx => { corriendo = false; };
 
         //AtacandoL2
-        inputcontrol.Ataques.L2.started += ctx => { L2Switch = true; };
-        inputcontrol.Ataques.L2.canceled += ctx => { L2Switch = false; };
+        inputcontrol.Ataques.L2.started += ctx => { AL2Switch = true; };
+        inputcontrol.Ataques.L2.canceled += ctx => { AL2Switch = false; };
 
         //atacandoR2
-        inputcontrol.Ataques.R2.started += ctx => { R2Switch = true; };
-        inputcontrol.Ataques.R2.canceled += ctx => { R2Switch = false; };
+        inputcontrol.Ataques.R2.started += ctx => { AR2Switch = true; };
+        inputcontrol.Ataques.R2.canceled += ctx => { AR2Switch = false; };
 
-        //atacandoL1
-        inputcontrol.Ataques.L1.started += ctx => { L1Switch = true; };
-        inputcontrol.Ataques.L1.canceled += ctx => { L1Switch = false; };
+        
 
         //Saltando/Aceptar
         inputcontrol.Moverse.Saltar.performed += ctx => { saltando = true; };
@@ -116,11 +110,11 @@ public class ShonuMove : MonoBehaviour
 
         //Cursor.lockState = CursorLockMode.Locked;
 
-       // Cursor.visible = true;
+        // Cursor.visible = true;
 
-        
 
-        
+
+
         Mana = 100;
 
         StartCoroutine("ManaRegen");
@@ -129,8 +123,7 @@ public class ShonuMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        VidaNormal = ShonuManage.Vida;
+        VidaAgua = ShonuManage.Vida;
 
 
         IsOnMenu = ScriptsMenu.PauseSwitch;
@@ -139,38 +132,41 @@ public class ShonuMove : MonoBehaviour
         {
             Movimiento();
             Saltar();
-            AttackNL2();
-            AttackR2();
+            AttackAL2();
+            AttackAR2();
             //AttackNL1();
+
+            
+
         }
-        else if(ShonuManage.Alive == false)
+        else if (ShonuManage.Alive == false)
         {
             animator.SetBool("DeathShonu", true);
         }
 
-       
+
 
         Gravity();
-     
-        
+
+
     }
 
     void TookDamage(int DamageTaken)
-    {   
-        if(Invuln >= 5)
+    {
+        if (Invuln >= 5)
         {
-            VidaNormal -= DamageTaken;
-            
+            VidaAgua -= DamageTaken;
+            print(VidaAgua);
 
             Invuln = 0;
 
             StartCoroutine("InvulnTime");
         }
-        
 
-        
 
-        if (VidaNormal <= 0)
+
+
+        if (VidaAgua <= 0)
         {
             ShonuManage.Alive = false;
 
@@ -185,9 +181,9 @@ public class ShonuMove : MonoBehaviour
             Invuln += 1;
 
             yield return new WaitForSeconds(0.3f);
-        }  
+        }
 
-                
+
     }
 
 
@@ -221,15 +217,15 @@ public class ShonuMove : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0f, SmoothAngle, 0f);
         }
-        
+
 
         Vector3 Movement = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
         if (Dirección.magnitude >= 0.1 && IsAttacking == false)
         {
-            
 
-            controller.Move(Movement.normalized * speed * Time.deltaTime );
+
+            controller.Move(Movement.normalized * speed * Time.deltaTime);
 
             //rb.AddForce(Movement.normalized * speed * Time.deltaTime);
 
@@ -237,8 +233,8 @@ public class ShonuMove : MonoBehaviour
         }
 
 
-        
-        if(corriendo && MovePos.y >0)
+
+        if (corriendo && MovePos.y > 0)
         {
             if (speed <= 30)
             {
@@ -248,10 +244,10 @@ public class ShonuMove : MonoBehaviour
             {
                 StopCoroutine("RampantRun");
             }
-            
+
             animator.SetBool("RunShonu", true);
 
-            
+
         }
         else
         {
@@ -275,7 +271,7 @@ public class ShonuMove : MonoBehaviour
         }
         */
     }
-    
+
     void Gravity()
     {
 
@@ -327,143 +323,20 @@ public class ShonuMove : MonoBehaviour
     }
 
 
-    void AttackNL2()
+    //ATAQUES
+
+    void AttackAL2()
     {
-        if (L2Switch == true && IsAttacking == false && Mana >= 20)
-        {
-            Mana -= 20;
 
-            IsAttacking = true;
-
-            animator.SetBool("IsAttackingL2", true);
-
-            NL2.gameObject.SetActive(true);
-
-            Invoke("StopNL2", NL2AttackTime);
-
-            
-
-        }
     }
-    void StopNL2()
+   
+    void AttackAR2()
     {
-        NL2.gameObject.SetActive(false);
-        
-        IsAttacking = false;
-
-        animator.SetBool("IsAttackingL2", false);
-    }
-
-    void AttackR2()
-    {
-        if ( R2Switch == true && IsAttacking == false && Mana >= 40)
-        {
-            Mana -= 40;
-            
-            IsAttacking = true;
-
-            animator.SetBool("IsAttackingR2", true);
-
-            Invoke("AttackR2Cast", 2.5f);
-            
-        }
-    }
-
-    void AttackR2Cast()
-    {
-       
-        NR2.gameObject.SetActive(true);
-
-        //Invoke("DashNR2", 1.5f);
-
-        Invoke("StopNR2", NR2AttackTime);
-
-
-        animator.SetBool("IsAttackingR2", false);
-
-        Invoke("NR2DashFinish", 1.1f);
-
-        
-    }
-
-    void NR2DashFinish()
-    {
-        
-
-        NR2.gameObject.SetActive(false);
-
-        IsAttacking = false;
-
-       
-    }
-    
-    /*
-    void StopNR2()
-    {
-        while (Time.time < DashActive)
-        {
-            Vector3 Backdash = transform.TransformDirection(Vector3.back);
-
-            DashActive = Time.time + 10;
-
-            controller.SimpleMove(Backdash * Dash);
-
-
-        }
-
-
-
-        NR2.gameObject.SetActive(false);
-
-        animator.SetBool("IsAttackingR2", false);
-
-        IsAttacking = false;
-    }
-    */
-
-    /*
-    void AttackNL1()
-    {
-        if (L1Switch==true && IsAttacking == false && Mana >= 30)
-        {
-            Mana -= 30;
-
-            IsAttacking = true;
-
-            NL1.gameObject.SetActive(true);
-
-            // StartCoroutine("NL1Frequency");
-
-            //Invoke("DashNR2", 1.5f);
-
-
-
-            Invoke("StopNL1", NL1AttackTime);
-
-        }
 
     }
 
-    void StopNL1()
-    {
-        NL1.gameObject.SetActive(false);
-
-        NL1Strong.gameObject.SetActive(true);
-
-        Invoke("StopNL1Strong", 1);
-
-        IsAttacking = false;
 
 
-    }
-
-    void StopNL1Strong()
-    {
-        NL1Strong.gameObject.SetActive(false);
-
-    }
-
-    */
 
     private void OnEnable()
     {
@@ -478,20 +351,21 @@ public class ShonuMove : MonoBehaviour
 
     IEnumerator RampantRun()
     {
-        while (speed <= 30) {
-            
+        while (speed <= 30)
+        {
+
             speed += 0.06f;
 
             yield return new WaitForSeconds(1f);
-        } 
+        }
     }
 
     IEnumerator ManaRegen()
     {
-        while(true)
+        while (true)
         {
             print("your MOM");
-            
+
             Mana += 0.6f;
 
             yield return new WaitForSeconds(0.3f);

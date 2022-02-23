@@ -41,6 +41,14 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ad347e5-eeb6-4eb3-9ccd-0dfe00528e08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -85,6 +93,17 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Saltar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""621a5fe3-0129-456c-9bb9-14011052e1ea"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -235,6 +254,52 @@ public class @InputControl : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ChangeKit"",
+            ""id"": ""133b1a33-8496-4eaa-b7c2-eb9e63ebf670"",
+            ""actions"": [
+                {
+                    ""name"": ""Water"",
+                    ""type"": ""Button"",
+                    ""id"": ""38d0e4cf-27e5-4bf3-a676-9d8a39eb292e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Normal"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee563ebd-6942-4bf0-90fb-22622a38a53e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ef276e98-b17e-4df4-a0b8-cf976b7c9975"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Water"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23716441-24c8-4041-8c9f-22a439b7c616"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Normal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -244,6 +309,7 @@ public class @InputControl : IInputActionCollection, IDisposable
         m_Moverse_Move = m_Moverse.FindAction("Move", throwIfNotFound: true);
         m_Moverse_Run = m_Moverse.FindAction("Run", throwIfNotFound: true);
         m_Moverse_Saltar = m_Moverse.FindAction("Saltar", throwIfNotFound: true);
+        m_Moverse_Roll = m_Moverse.FindAction("Roll", throwIfNotFound: true);
         // Camara
         m_Camara = asset.FindActionMap("Camara", throwIfNotFound: true);
         m_Camara_MoverCamara = m_Camara.FindAction("MoverCamara", throwIfNotFound: true);
@@ -258,6 +324,10 @@ public class @InputControl : IInputActionCollection, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
+        // ChangeKit
+        m_ChangeKit = asset.FindActionMap("ChangeKit", throwIfNotFound: true);
+        m_ChangeKit_Water = m_ChangeKit.FindAction("Water", throwIfNotFound: true);
+        m_ChangeKit_Normal = m_ChangeKit.FindAction("Normal", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -310,6 +380,7 @@ public class @InputControl : IInputActionCollection, IDisposable
     private readonly InputAction m_Moverse_Move;
     private readonly InputAction m_Moverse_Run;
     private readonly InputAction m_Moverse_Saltar;
+    private readonly InputAction m_Moverse_Roll;
     public struct MoverseActions
     {
         private @InputControl m_Wrapper;
@@ -317,6 +388,7 @@ public class @InputControl : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Moverse_Move;
         public InputAction @Run => m_Wrapper.m_Moverse_Run;
         public InputAction @Saltar => m_Wrapper.m_Moverse_Saltar;
+        public InputAction @Roll => m_Wrapper.m_Moverse_Roll;
         public InputActionMap Get() { return m_Wrapper.m_Moverse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -335,6 +407,9 @@ public class @InputControl : IInputActionCollection, IDisposable
                 @Saltar.started -= m_Wrapper.m_MoverseActionsCallbackInterface.OnSaltar;
                 @Saltar.performed -= m_Wrapper.m_MoverseActionsCallbackInterface.OnSaltar;
                 @Saltar.canceled -= m_Wrapper.m_MoverseActionsCallbackInterface.OnSaltar;
+                @Roll.started -= m_Wrapper.m_MoverseActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_MoverseActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_MoverseActionsCallbackInterface.OnRoll;
             }
             m_Wrapper.m_MoverseActionsCallbackInterface = instance;
             if (instance != null)
@@ -348,6 +423,9 @@ public class @InputControl : IInputActionCollection, IDisposable
                 @Saltar.started += instance.OnSaltar;
                 @Saltar.performed += instance.OnSaltar;
                 @Saltar.canceled += instance.OnSaltar;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
             }
         }
     }
@@ -500,11 +578,53 @@ public class @InputControl : IInputActionCollection, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // ChangeKit
+    private readonly InputActionMap m_ChangeKit;
+    private IChangeKitActions m_ChangeKitActionsCallbackInterface;
+    private readonly InputAction m_ChangeKit_Water;
+    private readonly InputAction m_ChangeKit_Normal;
+    public struct ChangeKitActions
+    {
+        private @InputControl m_Wrapper;
+        public ChangeKitActions(@InputControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Water => m_Wrapper.m_ChangeKit_Water;
+        public InputAction @Normal => m_Wrapper.m_ChangeKit_Normal;
+        public InputActionMap Get() { return m_Wrapper.m_ChangeKit; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ChangeKitActions set) { return set.Get(); }
+        public void SetCallbacks(IChangeKitActions instance)
+        {
+            if (m_Wrapper.m_ChangeKitActionsCallbackInterface != null)
+            {
+                @Water.started -= m_Wrapper.m_ChangeKitActionsCallbackInterface.OnWater;
+                @Water.performed -= m_Wrapper.m_ChangeKitActionsCallbackInterface.OnWater;
+                @Water.canceled -= m_Wrapper.m_ChangeKitActionsCallbackInterface.OnWater;
+                @Normal.started -= m_Wrapper.m_ChangeKitActionsCallbackInterface.OnNormal;
+                @Normal.performed -= m_Wrapper.m_ChangeKitActionsCallbackInterface.OnNormal;
+                @Normal.canceled -= m_Wrapper.m_ChangeKitActionsCallbackInterface.OnNormal;
+            }
+            m_Wrapper.m_ChangeKitActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Water.started += instance.OnWater;
+                @Water.performed += instance.OnWater;
+                @Water.canceled += instance.OnWater;
+                @Normal.started += instance.OnNormal;
+                @Normal.performed += instance.OnNormal;
+                @Normal.canceled += instance.OnNormal;
+            }
+        }
+    }
+    public ChangeKitActions @ChangeKit => new ChangeKitActions(this);
     public interface IMoverseActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnSaltar(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
     }
     public interface ICamaraActions
     {
@@ -523,5 +643,10 @@ public class @InputControl : IInputActionCollection, IDisposable
     public interface IUIActions
     {
         void OnNavigate(InputAction.CallbackContext context);
+    }
+    public interface IChangeKitActions
+    {
+        void OnWater(InputAction.CallbackContext context);
+        void OnNormal(InputAction.CallbackContext context);
     }
 }

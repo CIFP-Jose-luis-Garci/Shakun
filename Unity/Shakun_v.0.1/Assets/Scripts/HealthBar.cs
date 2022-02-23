@@ -12,7 +12,7 @@ public class HealthBar : MonoBehaviour
 
     public void Update()
     {
-        health = ShonuMove.Vida;
+        health = ShonuManage.Vida;
 
         SetHealth();
     }

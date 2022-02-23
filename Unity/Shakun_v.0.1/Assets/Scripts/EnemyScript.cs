@@ -12,7 +12,7 @@ public class EnemyScript : MonoBehaviour
     GameObject EnemyComp;
 
     //Contador de vida
-    float vida = 20;
+    float vida = 10;
     //switch para saber si sigue con vida
     bool Alive = true;
     
@@ -62,6 +62,10 @@ public class EnemyScript : MonoBehaviour
     //Si es pegao te busca aunque te pierda
     bool HasBeenHit = false;
 
+
+    [SerializeField] Transform ShonuNormal,ShonuAgua;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +77,7 @@ public class EnemyScript : MonoBehaviour
 
        
 
-        Shonu = GameObject.Find("Shonu 2").transform;
+        
 
         EnemyComp = this.transform.parent.gameObject;
 
@@ -92,7 +96,11 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+
+        ShonuChooser();
+
+
         IsOnMenu = ScriptsMenu.PauseSwitch;
 
         
@@ -205,7 +213,7 @@ public class EnemyScript : MonoBehaviour
                 //audioSource.Play();
             }
             
-            if (distanceToPlayer < 2 && ShonuMove.Alive == true)
+            if (distanceToPlayer < 2 && ShonuManage.Alive == true)
             {
                 animator.SetBool("IsAttacking", true);
                 gameObject.GetComponent<NavMeshAgent>().isStopped = true;
@@ -364,7 +372,23 @@ public class EnemyScript : MonoBehaviour
         rb.AddForce(new Vector3(0, 0.8f * KnockbackForceY, 0), ForceMode.Impulse);
     }
 
+    void ShonuChooser()
+    {
+        int ShonuNumber = ShonuManage.ShonuForm;
 
+        
+        
+        if(ShonuNumber == 1)
+        {
+            Shonu = ShonuNormal;
+        }
+        
+        if(ShonuNumber == 2)
+        {
+            Shonu = ShonuAgua;
+        }
+  
+    }
 }
 
 
