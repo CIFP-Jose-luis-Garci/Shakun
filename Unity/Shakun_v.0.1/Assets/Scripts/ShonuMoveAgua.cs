@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class ShonuMoveAgua : MonoBehaviour
 {
@@ -35,8 +35,8 @@ public class ShonuMoveAgua : MonoBehaviour
 
     //AL2Attack
     public GameObject AL2;
-    public float AL2AttackTime = 1f;
-    bool AL2Switch = false;
+    public float AL2AttackTime = 5f;
+    
 
     //NR2Attaack
     public GameObject AR2;
@@ -45,12 +45,12 @@ public class ShonuMoveAgua : MonoBehaviour
 
 
 
+    
 
-    int VidaAgua;
+    [SerializeField] GameObject GotaPrefab;
+    
 
-    public static bool Alive = true;
-
-    public bool IsAttacking = false;
+   
 
     public static float Mana;
 
@@ -63,12 +63,16 @@ public class ShonuMoveAgua : MonoBehaviour
 
     Vector3 dir;
 
-    Vector2 MovePos;
+    public static Vector2 MovePos;
 
 
-    int Invuln = 5;
+    
 
     bool IsOnMenu;
+
+    bool IsAttackingA;
+
+    float ManaA;
 
 
     private void Awake()
@@ -85,12 +89,12 @@ public class ShonuMoveAgua : MonoBehaviour
         inputcontrol.Moverse.Run.canceled += ctx => { corriendo = false; };
 
         //AtacandoL2
-        inputcontrol.Ataques.L2.started += ctx => { AL2Switch = true; };
-        inputcontrol.Ataques.L2.canceled += ctx => { AL2Switch = false; };
+        inputcontrol.Ataques.L2.performed += _ => AttackAL2();
+        inputcontrol.Ataques.L2.canceled += _ => StopAL2();
 
         //atacandoR2
-        inputcontrol.Ataques.R2.started += ctx => { AR2Switch = true; };
-        inputcontrol.Ataques.R2.canceled += ctx => { AR2Switch = false; };
+        inputcontrol.Ataques.R2.started += _ => AttackAR2();
+        //inputcontrol.Ataques.R2.canceled += ctx => { AR2Switch = false; };
 
         
 
@@ -115,16 +119,17 @@ public class ShonuMoveAgua : MonoBehaviour
 
 
 
-        Mana = 100;
-
-        StartCoroutine("ManaRegen");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        VidaAgua = ShonuManage.Vida;
+        ManaA = ShonuManage.MainMana;
 
+        
+
+        bool IsAttackingA = ShonuManage.IsAttacking;
 
         IsOnMenu = ScriptsMenu.PauseSwitch;
 
@@ -132,8 +137,8 @@ public class ShonuMoveAgua : MonoBehaviour
         {
             Movimiento();
             Saltar();
-            AttackAL2();
-            AttackAR2();
+            
+            
             //AttackNL1();
 
             
@@ -151,40 +156,9 @@ public class ShonuMoveAgua : MonoBehaviour
 
     }
 
-    void TookDamage(int DamageTaken)
-    {
-        if (Invuln >= 5)
-        {
-            VidaAgua -= DamageTaken;
-            print(VidaAgua);
+    
 
-            Invuln = 0;
-
-            StartCoroutine("InvulnTime");
-        }
-
-
-
-
-        if (VidaAgua <= 0)
-        {
-            ShonuManage.Alive = false;
-
-            StartCoroutine("ShonuDeath");
-        }
-    }
-
-    IEnumerator InvulnTime()
-    {
-        while (Invuln < 5)
-        {
-            Invuln += 1;
-
-            yield return new WaitForSeconds(0.3f);
-        }
-
-
-    }
+   
 
 
 
@@ -213,7 +187,7 @@ public class ShonuMoveAgua : MonoBehaviour
 
         float SmoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref TurnSmothness, TurnSmothTime);
 
-        if (MovePos.y > 0 && IsAttacking == false)
+        if (MovePos.y > 0 && IsAttackingA == false)
         {
             transform.rotation = Quaternion.Euler(0f, SmoothAngle, 0f);
         }
@@ -221,7 +195,7 @@ public class ShonuMoveAgua : MonoBehaviour
 
         Vector3 Movement = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
-        if (Dirección.magnitude >= 0.1 && IsAttacking == false)
+        if (Dirección.magnitude >= 0.1 && IsAttackingA == false)
         {
 
 
@@ -327,15 +301,72 @@ public class ShonuMoveAgua : MonoBehaviour
 
     void AttackAL2()
     {
+        if (IsAttackingA == false && ShonuManage.MainMana >= 5)
+        {
+           
 
+            IsAttackingA = true;
+
+            animator.SetBool("IsAttackingAL2", true);
+
+            Invoke("WaterRay", 2);
+
+            StartCoroutine("AL2Drain");
+        }
     }
-   
+    
+    void WaterRay()
+    {
+        AL2.gameObject.SetActive(true);
+    }
+    
+    
+    void StopAL2()
+    {
+        AL2.gameObject.SetActive(false);
+
+        IsAttackingA = false;
+
+        animator.SetBool("IsAttackingAL2", false);
+
+        StopCoroutine("AL2Drain");
+    }
+
+    
+    IEnumerator AL2Drain()
+    {
+        while (true)
+        {
+            ShonuManage.MainMana -= 5;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+       
+    }
+    
+    
+    
     void AttackAR2()
     {
+        if(ShonuManage.MainMana>= 40 && IsAttackingA == false) 
+        {
+            AR2.gameObject.SetActive(true);
+
+            IsAttackingA = true;
+
+            Invoke("StopAR2", 4);
+        }
 
     }
 
+    void StopAR2()
+    {
+        AR2.gameObject.SetActive(false);
 
+        IsAttackingA = false;
+
+        animator.SetBool("IsAttackingAL2", false);
+    }
 
 
     private void OnEnable()
@@ -360,17 +391,7 @@ public class ShonuMoveAgua : MonoBehaviour
         }
     }
 
-    IEnumerator ManaRegen()
-    {
-        while (true)
-        {
-            print("your MOM");
-
-            Mana += 0.6f;
-
-            yield return new WaitForSeconds(0.3f);
-        }
-    }
+   
 
     void AddMana(int ManaValue)
     {
@@ -378,13 +399,7 @@ public class ShonuMoveAgua : MonoBehaviour
     }
 
 
-    IEnumerator ShonuDeath()
-    {
-        yield return new WaitForSeconds(4);
-
-
-        SceneManager.LoadScene(6);
-    }
+   
 
     /*void Dash()
     {

@@ -14,7 +14,7 @@ public class ManaBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Mana = ShonuMove.Mana;
+        Mana = ShonuManage.MainMana;
 
         ManaSlider();
     }

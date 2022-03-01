@@ -27,7 +27,7 @@ public class CharacterHit : MonoBehaviour
     {
         if(other.gameObject.layer == 7)
         {
-            print("AA");
+            
             
             other.gameObject.SendMessage("Stun", 3f);
             other.gameObject.SendMessage("DamageTaker",5);

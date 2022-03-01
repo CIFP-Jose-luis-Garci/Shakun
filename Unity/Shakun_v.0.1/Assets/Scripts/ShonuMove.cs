@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class ShonuMove : MonoBehaviour
 {
@@ -38,7 +38,7 @@ public class ShonuMove : MonoBehaviour
     public float NL2AttackTime = 1f;
     bool L2Switch = false;
 
-   //NR2Attaack
+    //NR2Attaack
     public GameObject NR2;
     public float NR2AttackTime = 0.1f;
     float DashActive = 0;
@@ -51,12 +51,11 @@ public class ShonuMove : MonoBehaviour
     bool L1Switch = false;
 
 
-    int VidaNormal;
-
     
-    public bool IsAttacking = false;
 
-    public static float Mana;
+
+
+    float ManaN;
 
 
     Animator animator;
@@ -69,12 +68,13 @@ public class ShonuMove : MonoBehaviour
 
     Vector2 MovePos;
 
+    bool IsAttackingN;
 
-    int Invuln = 5;
+    
 
     bool IsOnMenu;
-    
-   
+
+
     private void Awake()
     {
         inputcontrol = new InputControl();
@@ -116,22 +116,23 @@ public class ShonuMove : MonoBehaviour
 
         //Cursor.lockState = CursorLockMode.Locked;
 
-       // Cursor.visible = true;
+        // Cursor.visible = true;
+
+
+
 
         
-
-        
-        Mana = 100;
-
-        StartCoroutine("ManaRegen");
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        ManaN = ShonuManage.MainMana;
+        
+        
 
-        VidaNormal = ShonuManage.Vida;
-
+        bool IsAttackingN = ShonuManage.IsAttacking;
 
         IsOnMenu = ScriptsMenu.PauseSwitch;
 
@@ -143,52 +144,21 @@ public class ShonuMove : MonoBehaviour
             AttackR2();
             //AttackNL1();
         }
-        else if(ShonuManage.Alive == false)
+        else if (ShonuManage.Alive == false)
         {
             animator.SetBool("DeathShonu", true);
         }
 
-       
+
 
         Gravity();
-     
-        
+
+
     }
 
-    void TookDamage(int DamageTaken)
-    {   
-        if(Invuln >= 5)
-        {
-            VidaNormal -= DamageTaken;
-            
+    
 
-            Invuln = 0;
-
-            StartCoroutine("InvulnTime");
-        }
-        
-
-        
-
-        if (VidaNormal <= 0)
-        {
-            ShonuManage.Alive = false;
-
-            StartCoroutine("ShonuDeath");
-        }
-    }
-
-    IEnumerator InvulnTime()
-    {
-        while (Invuln < 5)
-        {
-            Invuln += 1;
-
-            yield return new WaitForSeconds(0.3f);
-        }  
-
-                
-    }
+   
 
 
 
@@ -217,19 +187,19 @@ public class ShonuMove : MonoBehaviour
 
         float SmoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref TurnSmothness, TurnSmothTime);
 
-        if (MovePos.y > 0 && IsAttacking == false)
+        if (MovePos.y > 0 && IsAttackingN == false)
         {
             transform.rotation = Quaternion.Euler(0f, SmoothAngle, 0f);
         }
-        
+
 
         Vector3 Movement = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
-        if (Dirección.magnitude >= 0.1 && IsAttacking == false)
+        if (Dirección.magnitude >= 0.1 && IsAttackingN == false)
         {
-            
 
-            controller.Move(Movement.normalized * speed * Time.deltaTime );
+
+            controller.Move(Movement.normalized * speed * Time.deltaTime);
 
             //rb.AddForce(Movement.normalized * speed * Time.deltaTime);
 
@@ -237,8 +207,8 @@ public class ShonuMove : MonoBehaviour
         }
 
 
-        
-        if(corriendo && MovePos.y >0)
+
+        if (corriendo && MovePos.y > 0)
         {
             if (speed <= 30)
             {
@@ -248,10 +218,10 @@ public class ShonuMove : MonoBehaviour
             {
                 StopCoroutine("RampantRun");
             }
-            
+
             animator.SetBool("RunShonu", true);
 
-            
+
         }
         else
         {
@@ -275,7 +245,7 @@ public class ShonuMove : MonoBehaviour
         }
         */
     }
-    
+
     void Gravity()
     {
 
@@ -329,11 +299,11 @@ public class ShonuMove : MonoBehaviour
 
     void AttackNL2()
     {
-        if (L2Switch == true && IsAttacking == false && Mana >= 20)
+        if (L2Switch == true && IsAttackingN == false && ShonuManage.MainMana >= 20)
         {
-            Mana -= 20;
+            ShonuManage.MainMana -= 20;
 
-            IsAttacking = true;
+            IsAttackingN = true;
 
             animator.SetBool("IsAttackingL2", true);
 
@@ -341,37 +311,37 @@ public class ShonuMove : MonoBehaviour
 
             Invoke("StopNL2", NL2AttackTime);
 
-            
+
 
         }
     }
     void StopNL2()
     {
         NL2.gameObject.SetActive(false);
-        
-        IsAttacking = false;
+
+        IsAttackingN = false;
 
         animator.SetBool("IsAttackingL2", false);
     }
 
     void AttackR2()
     {
-        if ( R2Switch == true && IsAttacking == false && Mana >= 40)
+        if (R2Switch == true && IsAttackingN == false && ShonuManage.MainMana >= 40)
         {
-            Mana -= 40;
-            
-            IsAttacking = true;
+            ShonuManage.MainMana -= 40;
+
+            IsAttackingN = true;
 
             animator.SetBool("IsAttackingR2", true);
 
             Invoke("AttackR2Cast", 2.5f);
-            
+
         }
     }
 
     void AttackR2Cast()
     {
-       
+
         NR2.gameObject.SetActive(true);
 
         //Invoke("DashNR2", 1.5f);
@@ -383,43 +353,32 @@ public class ShonuMove : MonoBehaviour
 
         Invoke("NR2DashFinish", 1.1f);
 
-        
+
     }
 
     void NR2DashFinish()
     {
-        
+
 
         NR2.gameObject.SetActive(false);
 
-        IsAttacking = false;
+        IsAttackingN = false;
 
-       
+
     }
+
     
-    /*
     void StopNR2()
     {
-        while (Time.time < DashActive)
-        {
-            Vector3 Backdash = transform.TransformDirection(Vector3.back);
-
-            DashActive = Time.time + 10;
-
-            controller.SimpleMove(Backdash * Dash);
-
-
-        }
-
-
+       
 
         NR2.gameObject.SetActive(false);
 
         animator.SetBool("IsAttackingR2", false);
 
-        IsAttacking = false;
+        IsAttackingN = false;
     }
-    */
+    
 
     /*
     void AttackNL1()
@@ -478,39 +437,21 @@ public class ShonuMove : MonoBehaviour
 
     IEnumerator RampantRun()
     {
-        while (speed <= 30) {
-            
+        while (speed <= 30)
+        {
+
             speed += 0.06f;
 
             yield return new WaitForSeconds(1f);
-        } 
-    }
-
-    IEnumerator ManaRegen()
-    {
-        while(true)
-        {
-            print("your MOM");
-            
-            Mana += 0.6f;
-
-            yield return new WaitForSeconds(0.3f);
         }
     }
 
-    void AddMana(int ManaValue)
-    {
-        Mana += ManaValue;
-    }
+   
+
+    
 
 
-    IEnumerator ShonuDeath()
-    {
-        yield return new WaitForSeconds(4);
-
-
-        SceneManager.LoadScene(6);
-    }
+    
 
     /*void Dash()
     {

@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHit : MonoBehaviour
+public class AguaR2Hit : MonoBehaviour
 {
 
-
-    GameObject Shonu;
-
-
+   
+    
+    
     // Start is called before the first frame update
     void Start()
     {
         gameObject.SetActive(false);
-
-        Shonu = GameObject.Find("Shonu");
-
     }
 
     // Update is called once per frame
@@ -24,16 +20,15 @@ public class EnemyHit : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.layer == 8)
+
+        if (other.gameObject.layer == 7)
         {
-            
-            Shonu.SendMessage("TookDamage", 2);
+            other.gameObject.SendMessage("Stun", 6f);
+            other.gameObject.SendMessage("DamageTaker", 2);
         }
+
     }
-
-
-
 
 }
