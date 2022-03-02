@@ -142,7 +142,7 @@ public class EnemyScript : MonoBehaviour
 
                 if (distance > 2f)
                 {
-                    agent.speed = 5f;
+                    agent.speed = 7f;
                 }
                 else
                 {
@@ -285,7 +285,7 @@ public class EnemyScript : MonoBehaviour
 
         }
 
-        
+        print(vida);
         
         
         
