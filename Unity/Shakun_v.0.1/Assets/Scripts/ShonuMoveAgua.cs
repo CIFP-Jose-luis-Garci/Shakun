@@ -350,6 +350,9 @@ public class ShonuMoveAgua : MonoBehaviour
     {
         if(ShonuManage.MainMana>= 40 && IsAttackingA == false) 
         {
+            ShonuManage.MainMana -= 40;
+
+
             AR2.gameObject.SetActive(true);
 
             IsAttackingA = true;
