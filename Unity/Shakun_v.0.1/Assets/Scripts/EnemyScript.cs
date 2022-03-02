@@ -283,7 +283,7 @@ public class EnemyScript : MonoBehaviour
             
         }
 
-        Shonu.SendMessage("AddMana", Damage / 2);
+        
         
         
         print(vida);
@@ -351,7 +351,7 @@ public class EnemyScript : MonoBehaviour
 
     void KnockBack(int KnockbackForce)
     {
-        print("BBB");
+        
 
         Stun(3);
 
@@ -368,7 +368,7 @@ public class EnemyScript : MonoBehaviour
     void KnockBackY(int KnockbackForceY)
     {
         
-        print("OSTOY VOLANDO");
+        
         rb.AddForce(new Vector3(0, 0.8f * KnockbackForceY, 0), ForceMode.Impulse);
     }
 
