@@ -155,7 +155,10 @@ public class EnemyScript : MonoBehaviour
 
             }
        
-
+            if(vida <= 0)
+            {
+            ShopEvent.CoinCount += 1;
+            }
 
 
        
@@ -275,11 +278,13 @@ public class EnemyScript : MonoBehaviour
 
             animator.SetBool("DeathEnemigo", true);
 
-            ShopEvent.CoinCount += 1;
+            HurtBox.isTrigger = true;
+
+            
 
             //rb.gameObject.SetActive(false);
 
-            HurtBox.isTrigger = true;
+            
             
         }
 

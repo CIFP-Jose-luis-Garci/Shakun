@@ -304,20 +304,21 @@ public class ShonuMoveAgua : MonoBehaviour
         if (IsAttackingA == false && ShonuManage.MainMana >= 5)
         {
            
-
             IsAttackingA = true;
 
             animator.SetBool("IsAttackingAL2", true);
 
             Invoke("WaterRay", 2);
 
-            StartCoroutine("AL2Drain");
+           
         }
     }
     
     void WaterRay()
     {
         AL2.gameObject.SetActive(true);
+
+        StartCoroutine("AL2Drain");
     }
     
     

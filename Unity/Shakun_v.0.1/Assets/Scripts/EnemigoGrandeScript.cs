@@ -31,8 +31,7 @@ public class EnemigoGrandeScript : MonoBehaviour
     float distance;
 
     //Booleana que me permite saber si ha detectado al jugador
-    bool detected;
-    bool pillado = false;
+   
 
     //Componente Nav Mesh Agent
     NavMeshAgent agent;
@@ -50,8 +49,7 @@ public class EnemigoGrandeScript : MonoBehaviour
 
 
     //Variables para detectar al jugador
-    float visionRange = 50f; //10 metros de visión
-    float visionConeAngle = 80f; //60º de angulo de visión
+    
 
     GameObject Hitbox;
 
