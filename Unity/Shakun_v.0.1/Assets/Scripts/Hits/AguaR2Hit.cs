@@ -20,13 +20,13 @@ public class AguaR2Hit : MonoBehaviour
         
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
 
         if (other.gameObject.layer == 7)
         {
-            other.gameObject.SendMessage("Stun", 6f);
-            other.gameObject.SendMessage("DamageTaker", 0.7);
+            other.gameObject.SendMessage("Stun", 2f);
+            other.gameObject.SendMessage("DamageTaker", 1);
         }
 
     }
