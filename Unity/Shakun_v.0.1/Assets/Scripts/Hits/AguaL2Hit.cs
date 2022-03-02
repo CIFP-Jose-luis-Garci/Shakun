@@ -20,7 +20,7 @@ public class AguaL2Hit : MonoBehaviour
     {
 
     }
-
+    //CHORRITO
 
     private void OnTriggerStay(Collider other)
     {
