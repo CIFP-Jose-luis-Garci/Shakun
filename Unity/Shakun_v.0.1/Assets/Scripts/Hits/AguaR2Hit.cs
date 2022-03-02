@@ -26,7 +26,7 @@ public class AguaR2Hit : MonoBehaviour
         if (other.gameObject.layer == 7)
         {
             other.gameObject.SendMessage("Stun", 6f);
-            other.gameObject.SendMessage("DamageTaker", 1);
+            other.gameObject.SendMessage("DamageTaker", 0.7);
         }
 
     }
