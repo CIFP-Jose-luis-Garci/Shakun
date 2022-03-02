@@ -12,7 +12,7 @@ public class EnemyScript : MonoBehaviour
     GameObject EnemyComp;
 
     //Contador de vida
-    float vida = 10;
+    float vida = 5;
     //switch para saber si sigue con vida
     bool Alive = true;
     
@@ -155,7 +155,7 @@ public class EnemyScript : MonoBehaviour
 
             }
        
-
+            
 
 
        
@@ -275,19 +275,26 @@ public class EnemyScript : MonoBehaviour
 
             animator.SetBool("DeathEnemigo", true);
 
+            HurtBox.enabled = false;
+
             ShopEvent.CoinCount += 1;
 
             //rb.gameObject.SetActive(false);
 
-            HurtBox.isTrigger = true;
-            
+
+
         }
 
         
         
         
-        print(vida);
+        
     }
+
+
+    
+
+
 
     IEnumerator HurtAnim()
     {

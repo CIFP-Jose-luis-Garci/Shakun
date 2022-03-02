@@ -20,7 +20,7 @@ public class AguaL2Hit : MonoBehaviour
     {
 
     }
-
+    //CHORRITO
 
     private void OnTriggerStay(Collider other)
     {
@@ -28,7 +28,7 @@ public class AguaL2Hit : MonoBehaviour
             if (other.gameObject.layer == 7)
             {
                 other.gameObject.SendMessage("Stun", 3f);
-                other.gameObject.SendMessage("DamageTaker", 0.5);
+                other.gameObject.SendMessage("DamageTaker", 0.75);
             }
 
     }

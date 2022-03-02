@@ -35,7 +35,7 @@ public class ShopEvent : MonoBehaviour
 
     private void Update()
     {
-        CoinText.text =  "" +CoinCount;
+        CoinText.text =  "" + CoinCount;
     }
 
 
