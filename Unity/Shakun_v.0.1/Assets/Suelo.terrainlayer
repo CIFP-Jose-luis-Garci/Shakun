@@ -9,7 +9,7 @@ TerrainLayer:
   m_Name: Suelo
   m_DiffuseTexture: {fileID: 2800000, guid: 3f24b311153434aed806d09b6893d22f, type: 3}
   m_NormalMapTexture: {fileID: 2800000, guid: 7bd42aa6a5eb44497a785c4c020d77ec, type: 3}
-  m_MaskMapTexture: {fileID: 2800000, guid: 8bfacb3244f094964929945b391aa4a0, type: 3}
+  m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 500, y: 500}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
