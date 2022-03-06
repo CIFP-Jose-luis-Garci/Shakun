@@ -17,6 +17,8 @@ public class ShopEvent : MonoBehaviour
 
     public static int CoinCount;
 
+    public static bool HasFinished = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +48,9 @@ public class ShopEvent : MonoBehaviour
            
             if(CoinCount >= 4)
             {
-                SceneManager.LoadScene(6);
+                SceneManager.LoadScene(4);
+
+                HasFinished = true;
             }
             else
             {

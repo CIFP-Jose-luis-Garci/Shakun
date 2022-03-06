@@ -10,8 +10,22 @@ public class GameOverMenuScript : MonoBehaviour
         
         ShonuManage.Vida = 50;
         ShonuManage.Alive = true;
-        SceneManager.LoadScene(3);
         
+        if(ShopEvent.HasFinished = true && TeleportScript.HasFinished2 == false)
+        {
+            SceneManager.LoadScene(4);
+        }
+
+        if (ShopEvent.HasFinished = true && TeleportScript.HasFinished2 == true)
+        {
+            SceneManager.LoadScene(6);
+        }
+
+        if (ShopEvent.HasFinished = false && TeleportScript.HasFinished2 == false)
+        {
+            SceneManager.LoadScene(3);
+        }
+
     }
 
     public void Salir()

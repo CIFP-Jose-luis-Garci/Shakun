@@ -127,7 +127,7 @@ public class ShonuMoveAgua : MonoBehaviour
     {
         ManaA = ShonuManage.MainMana;
 
-        
+        print(MovePos.x);
 
         bool IsAttackingA = ShonuManage.IsAttacking;
 
@@ -203,7 +203,24 @@ public class ShonuMoveAgua : MonoBehaviour
 
             //rb.AddForce(Movement.normalized * speed * Time.deltaTime);
 
+           /* if(Movement.x < -0)
+            {
+                animator.SetBool("StrafeLeft", true);
+            }
 
+            if(MovePos.x > 0)
+            {
+                animator.SetBool("StrafeRight", true);
+            }
+
+            else
+            {
+                animator.SetBool("StrafeLeft", false);
+                animator.SetBool("StrafeRight", false);
+            }
+           */
+            
+        
         }
 
 

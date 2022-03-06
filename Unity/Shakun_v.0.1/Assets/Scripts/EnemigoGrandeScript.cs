@@ -64,6 +64,7 @@ public class EnemigoGrandeScript : MonoBehaviour
 
     [SerializeField] Transform ShonuNormal, ShonuAgua;
 
+    [SerializeField] GameObject Attack0, Attack1, Attack2;
 
     // Start is called before the first frame update
     void Start()
@@ -172,10 +173,52 @@ public class EnemigoGrandeScript : MonoBehaviour
 
         if (distanceToPlayer < 4 && ShonuManage.Alive == true)
         {
-            
-            
+            int AttackNumber = Random.Range(0, 3);
+
+
             animator.SetBool("IsAttacking", true);
-            animator.SetInteger("AttackNumber", Random.Range(0, 3));
+            animator.SetInteger("AttackNumber",AttackNumber);
+
+            
+            
+            
+            
+            if(AttackNumber == 0)
+            {
+                Attack0.SetActive(true);
+
+                Invoke("Attack0End", 1);
+            }
+
+            else if(AttackNumber == 1)
+            {
+                Attack1.SetActive(true);
+
+                Invoke("Attack1End", 1);
+            }
+            
+            else if(AttackNumber == 2)
+            {
+                Attack2.SetActive(true);
+
+                Invoke("Attack2End", 0.5f);
+            }
+            
+            
+            void Attack0End()
+            {
+                Attack0.SetActive(false);
+            }
+
+            void Attack1End()
+            {
+                Attack1.SetActive(false);
+            }
+
+            void Attack2End()
+            {
+                Attack2.SetActive(false);
+            }
 
             gameObject.GetComponent<NavMeshAgent>().isStopped = true;
 
