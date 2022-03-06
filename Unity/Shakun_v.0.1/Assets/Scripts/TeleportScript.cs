@@ -29,7 +29,7 @@ public class TeleportScript : MonoBehaviour
         {
             SceneManager.LoadScene(6);
 
-            HasFinished2 = true;
+            ShonuManage.spawn = 3;
         }
     }
 

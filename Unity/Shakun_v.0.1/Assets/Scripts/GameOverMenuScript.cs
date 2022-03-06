@@ -9,21 +9,24 @@ public class GameOverMenuScript : MonoBehaviour
     {
         
         ShonuManage.Vida = 50;
+        ShonuManage.MainMana = 100;
         ShonuManage.Alive = true;
         
-        if(ShopEvent.HasFinished = true && TeleportScript.HasFinished2 == false)
+        if(ShonuManage.spawn == 1)
+        {
+            SceneManager.LoadScene(3);
+
+            ShopEvent.CoinCount = 0;
+        }
+
+       else if (ShonuManage.spawn == 2)
         {
             SceneManager.LoadScene(4);
         }
 
-        if (ShopEvent.HasFinished = true && TeleportScript.HasFinished2 == true)
+       else if (ShonuManage.spawn == 3)
         {
             SceneManager.LoadScene(6);
-        }
-
-        if (ShopEvent.HasFinished = false && TeleportScript.HasFinished2 == false)
-        {
-            SceneManager.LoadScene(3);
         }
 
     }

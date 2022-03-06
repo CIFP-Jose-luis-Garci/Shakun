@@ -17,7 +17,7 @@ public class ShopEvent : MonoBehaviour
 
     public static int CoinCount;
 
-    public static bool HasFinished = false;
+    
 
 
     // Start is called before the first frame update
@@ -50,7 +50,7 @@ public class ShopEvent : MonoBehaviour
             {
                 SceneManager.LoadScene(4);
 
-                HasFinished = true;
+                ShonuManage.spawn = 2;
             }
             else
             {

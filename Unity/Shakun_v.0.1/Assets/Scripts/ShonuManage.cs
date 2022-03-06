@@ -22,6 +22,8 @@ public class ShonuManage : MonoBehaviour
 
     int Invuln = 5;
 
+    public static int spawn = 1;
+
 
     private void Awake()
     {
@@ -111,7 +113,7 @@ public class ShonuManage : MonoBehaviour
         yield return new WaitForSeconds(4);
 
 
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(8);
     }
 
 
