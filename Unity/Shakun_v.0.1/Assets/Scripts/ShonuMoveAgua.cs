@@ -75,6 +75,9 @@ public class ShonuMoveAgua : MonoBehaviour
     float ManaA;
 
 
+
+    [SerializeField] AudioSource FootSteps1, FootSteps2, FootSteps3;
+
     private void Awake()
     {
         inputcontrol = new InputControl();
@@ -262,6 +265,33 @@ public class ShonuMoveAgua : MonoBehaviour
         }
         */
     }
+
+    void Step()
+    {
+
+        if (ShonuManage.spawn == 1)
+        {
+            FootSteps1.Play();
+        }
+
+        if (ShonuManage.spawn == 2)
+        {
+            FootSteps2.Play();
+        }
+
+        if (ShonuManage.spawn == 3)
+        {
+            FootSteps3.Play();
+        }
+
+
+
+
+
+    }
+
+
+
 
     void Gravity()
     {

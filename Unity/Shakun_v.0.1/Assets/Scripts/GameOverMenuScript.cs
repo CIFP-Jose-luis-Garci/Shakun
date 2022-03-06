@@ -10,6 +10,7 @@ public class GameOverMenuScript : MonoBehaviour
         
         ShonuManage.Vida = 50;
         ShonuManage.MainMana = 100;
+
         ShonuManage.Alive = true;
         
         if(ShonuManage.spawn == 1)
