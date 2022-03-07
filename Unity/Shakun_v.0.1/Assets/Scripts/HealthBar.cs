@@ -15,13 +15,6 @@ public class HealthBar : MonoBehaviour
         health = ShonuManage.Vida;
 
         SetHealth();
-    
-        if(health <= 0)
-        {
-            gameObject.SetActive(false);
-        }
-        
-    
     }
 
     public void  SetHealth()
