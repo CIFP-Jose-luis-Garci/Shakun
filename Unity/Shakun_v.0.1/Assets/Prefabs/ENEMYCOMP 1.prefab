@@ -2533,7 +2533,6 @@ MonoBehaviour:
   speed: 2
   emptyGoal: {fileID: 4972549065634810653}
   Shonu: {fileID: 0}
-  Hitbox: {fileID: 4972549066736188908}
   ShonuNormal: {fileID: 0}
   ShonuAgua: {fileID: 0}
 --- !u!195 &4972549065766235826
