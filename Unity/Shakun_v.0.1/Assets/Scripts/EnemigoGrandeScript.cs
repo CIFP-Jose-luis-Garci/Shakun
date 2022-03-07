@@ -257,7 +257,7 @@ public class EnemigoGrandeScript : MonoBehaviour
         {
             Alive = false;
 
-
+            gameObject.SetActive(false);
 
             HurtBox.isTrigger = true;
 
