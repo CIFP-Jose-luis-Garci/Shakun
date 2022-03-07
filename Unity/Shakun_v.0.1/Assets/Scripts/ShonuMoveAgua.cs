@@ -75,6 +75,9 @@ public class ShonuMoveAgua : MonoBehaviour
     float ManaA;
 
 
+
+    [SerializeField] AudioSource FootSteps1, FootSteps2, FootSteps3;
+
     private void Awake()
     {
         inputcontrol = new InputControl();
@@ -127,7 +130,7 @@ public class ShonuMoveAgua : MonoBehaviour
     {
         ManaA = ShonuManage.MainMana;
 
-        
+        print(MovePos.x);
 
         bool IsAttackingA = ShonuManage.IsAttacking;
 
@@ -203,7 +206,24 @@ public class ShonuMoveAgua : MonoBehaviour
 
             //rb.AddForce(Movement.normalized * speed * Time.deltaTime);
 
+           /* if(Movement.x < -0)
+            {
+                animator.SetBool("StrafeLeft", true);
+            }
 
+            if(MovePos.x > 0)
+            {
+                animator.SetBool("StrafeRight", true);
+            }
+
+            else
+            {
+                animator.SetBool("StrafeLeft", false);
+                animator.SetBool("StrafeRight", false);
+            }
+           */
+            
+        
         }
 
 
@@ -245,6 +265,33 @@ public class ShonuMoveAgua : MonoBehaviour
         }
         */
     }
+
+    void Step()
+    {
+
+        if (ShonuManage.spawn == 1)
+        {
+            FootSteps1.Play();
+        }
+
+        if (ShonuManage.spawn == 2)
+        {
+            FootSteps2.Play();
+        }
+
+        if (ShonuManage.spawn == 3)
+        {
+            FootSteps3.Play();
+        }
+
+
+
+
+
+    }
+
+
+
 
     void Gravity()
     {

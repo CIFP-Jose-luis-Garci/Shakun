@@ -9,9 +9,27 @@ public class GameOverMenuScript : MonoBehaviour
     {
         
         ShonuManage.Vida = 50;
+        ShonuManage.MainMana = 100;
+
         ShonuManage.Alive = true;
-        SceneManager.LoadScene(3);
         
+        if(ShonuManage.spawn == 1)
+        {
+            SceneManager.LoadScene(3);
+
+            ShopEvent.CoinCount = 0;
+        }
+
+       else if (ShonuManage.spawn == 2)
+        {
+            SceneManager.LoadScene(4);
+        }
+
+       else if (ShonuManage.spawn == 3)
+        {
+            SceneManager.LoadScene(6);
+        }
+
     }
 
     public void Salir()

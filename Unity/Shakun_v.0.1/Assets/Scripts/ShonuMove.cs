@@ -74,6 +74,8 @@ public class ShonuMove : MonoBehaviour
 
     bool IsOnMenu;
 
+    [SerializeField] AudioSource FootSteps1, FootSteps2, FootSteps3;
+
 
     private void Awake()
     {
@@ -157,7 +159,7 @@ public class ShonuMove : MonoBehaviour
     }
 
     
-
+    
    
 
 
@@ -197,7 +199,7 @@ public class ShonuMove : MonoBehaviour
 
         if (Dirección.magnitude >= 0.1 && IsAttackingN == false)
         {
-
+            
 
             controller.Move(Movement.normalized * speed * Time.deltaTime);
 
@@ -205,21 +207,28 @@ public class ShonuMove : MonoBehaviour
 
 
         }
-
-
-
-        if (corriendo && MovePos.y > 0)
+        else
         {
-            if (speed <= 30)
-            {
-                StartCoroutine("RampantRun");
-            }
-            else
-            {
-                StopCoroutine("RampantRun");
-            }
+            
+        }
 
-            animator.SetBool("RunShonu", true);
+       
+
+
+
+
+            if (corriendo && MovePos.y > 0)
+            {
+                if (speed <= 30)
+                {
+                 StartCoroutine("RampantRun");
+                }
+                 else
+                 {
+                    StopCoroutine("RampantRun");
+                 }
+
+                animator.SetBool("RunShonu", true);
 
 
         }
@@ -245,6 +254,37 @@ public class ShonuMove : MonoBehaviour
         }
         */
     }
+
+
+   
+
+
+    void Step()
+    {
+
+        if (ShonuManage.spawn == 1)
+        {
+            FootSteps1.Play();
+        }
+
+        if (ShonuManage.spawn == 2)
+        {
+            FootSteps2.Play();
+        }
+
+        if (ShonuManage.spawn == 3)
+        {
+            FootSteps3.Play();
+        }
+
+
+
+
+        
+    }
+    
+
+
 
     void Gravity()
     {
@@ -446,12 +486,7 @@ public class ShonuMove : MonoBehaviour
         }
     }
 
-   
-
-    
-
-
-    
+  
 
     /*void Dash()
     {

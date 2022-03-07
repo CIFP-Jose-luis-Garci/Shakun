@@ -52,7 +52,7 @@ public class EnemyScript : MonoBehaviour
     float visionRange = 50f; //10 metros de visión
     float visionConeAngle = 80f; //60º de angulo de visión
 
-    GameObject Hitbox;
+    [SerializeField] GameObject Hitbox;
 
     BoxCollider HurtBox;
 
@@ -82,7 +82,7 @@ public class EnemyScript : MonoBehaviour
         EnemyComp = this.transform.parent.gameObject;
 
         
-        Hitbox = this.transform.GetChild(33).gameObject;
+        
 
         HurtBox = GetComponent<BoxCollider>();
 
