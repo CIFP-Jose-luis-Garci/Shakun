@@ -27,7 +27,7 @@ public class BossAttack1 : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
 
-            Shonu.SendMessage("TookDamage", 2);
+            Shonu.SendMessage("TookDamage", 4);
         }
     }
 }

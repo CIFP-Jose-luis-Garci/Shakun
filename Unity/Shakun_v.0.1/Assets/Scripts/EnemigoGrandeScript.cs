@@ -13,7 +13,7 @@ public class EnemigoGrandeScript : MonoBehaviour
     GameObject EnemyComp;
 
     //Contador de vida
-    public static float vida = 15;
+    float vida = 30;
     //switch para saber si sigue con vida
     bool Alive = true;
 
@@ -97,7 +97,6 @@ public class EnemigoGrandeScript : MonoBehaviour
     void Update()
     {
 
-        print(vida);
 
         ShonuChooser();
 
@@ -244,7 +243,7 @@ public class EnemigoGrandeScript : MonoBehaviour
 
     void DamageTaker(int Damage)
     {
-
+        animator.SetBool("IsGettingHit", false);
 
         HasBeenHit = true;
 
