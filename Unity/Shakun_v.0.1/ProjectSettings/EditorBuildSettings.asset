@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TerrenoDragon.unity
     guid: ea3118d5e1486544095f39172ebc3036
   - enabled: 1
+    path: Assets/Scenes/Creditos.unity
+    guid: 52bde91c4ea566849b028b2a4b133739
+  - enabled: 1
     path: Assets/Scenes/Pruebas.unity
     guid: 6ba0fc6d5bd18384889910b7f0e535c8
   - enabled: 1
